@@ -27,7 +27,7 @@ class _ChangeTimerButtonState extends State<ChangeTimerButton> {
                 context,
                 MaterialPageRoute(builder: (context) => MyTabs()),
                     (route) => false,
-              );
+              );                                                    //MyTabs() 클래스를 재호출
         }
     );
   }
