@@ -20,11 +20,9 @@ class _ChangeTimerButtonState extends State<ChangeTimerButton> {
         onPressed: () {
           if (currentState == 0) {
             currentState = 1;
-            Home();
           }
           else {
             currentState = 0;
-            Home();
           }
           Navigator.pushAndRemoveUntil(
                 context,
