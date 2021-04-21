@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
-import '../home.dart';
 
 //타이머간 화면 전환 버튼 구현
 class ChangeTimerButton extends StatefulWidget {
