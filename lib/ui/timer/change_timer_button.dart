@@ -21,20 +21,16 @@ class _ChangeTimerButtonState extends State<ChangeTimerButton> {
           if (currentState == 0) {
             currentState = 1;
             Home();
-
           }
           else {
             currentState = 0;
             Home();
-
           }
-
-          /*Navigator.pushAndRemoveUntil(
+          Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => Home()),
+                MaterialPageRoute(builder: (context) => MyTabs()),
                     (route) => false,
-              );*/
-
+              );
         }
     );
   }
