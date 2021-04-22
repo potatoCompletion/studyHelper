@@ -18,9 +18,9 @@ class AtimerState extends State<Atimer> {
     var secs = milliseconds ~/ 1000;
     var hours = (secs ~/ 3600).toString().padLeft(2, '0');
     var minutes = ((secs % 3600) ~/ 60).toString().padLeft(2, '0');
-    var seconds = (secs % 60).toString().padLeft(2, '0');  return "$hours:$minutes:$seconds";
+    var seconds = (secs % 60).toString().padLeft(2, '0');
+    return "$hours:$minutes:$seconds";
   }
-
 
   @override
   void initState() {
@@ -41,29 +41,27 @@ class AtimerState extends State<Atimer> {
   void handleStartStop() {
     if (_stopwatch.isRunning) {
       _stopwatch.stop();
-    }
-    else {
+    } else {
       _stopwatch.start();
     }
-    setState(() {});    // re-render the page
+    setState(() {}); // re-render the page
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child:
-        Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  ChangeTimerButton()
-                ]
-            ),
-            Text(formatTime(_stopwatch.elapsedMilliseconds), style: TextStyle(fontSize: 48.0)),
-            ElevatedButton(onPressed: handleStartStop, child: Text(_stopwatch.isRunning ? 'Stop' : 'Start')),
+                children: <Widget>[ChangeTimerButton()]),
+            Text(formatTime(_stopwatch.elapsedMilliseconds),
+                style: TextStyle(fontSize: 48.0)),
+            ElevatedButton(
+                onPressed: handleStartStop,
+                child: Text(_stopwatch.isRunning ? 'Stop' : 'Start')),
           ],
         ),
       ),

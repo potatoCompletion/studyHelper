@@ -20,3 +20,4 @@ class _HomeState extends State<Home> {
     }
   }
 }
+//TODO : PageView 사용해서 두 가지 타이머 스와이프 전환 가능하게 구현해야함. (2020-04-22)

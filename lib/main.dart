@@ -5,13 +5,12 @@ import './ui/rewards/reward.dart';
 import './ui/setting/setting.dart';
 import './ui/home.dart';
 
-
 void main() => runApp(MaterialApp(home: MyTabs()));
 
 var currentState = 0;
 
 // TabController 객체를 멤버로 만들어서 상태를 유지하기 때문에 StatefulWidget 클래스 사용
-class MyTabs extends StatefulWidget{
+class MyTabs extends StatefulWidget {
   @override
   MyTabsState createState() => MyTabsState();
 }
@@ -42,25 +41,24 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       //appBar: AppBar(title: Text('타이머 예시')),
-      body: TabBarView(
-          controller: controller,                     // 컨트롤러 연결
-          children: [Home(), Calendar(), Reward(), Setting()]
-      ),
+      body: TabBarView(controller: controller, // 컨트롤러 연결
+          children: [Home(), Calendar(), Reward(), Setting()]),
       bottomNavigationBar: Container(
-        child: TabBar(
-            controller: controller,                 // 컨트롤러 연결
+        child: TabBar(controller: controller, // 컨트롤러 연결
             tabs: [
               // 제목에 들어간 색상은 중요.
               Tab(icon: Icon(Icons.av_timer), text: 'Timer'),
-              Tab(icon: Icon(Icons.calendar_today), text: 'Calendar',),
+              Tab(
+                icon: Icon(Icons.calendar_today),
+                text: 'Calendar',
+              ),
               Tab(icon: Icon(Icons.card_giftcard), text: 'Reward'),
               Tab(icon: Icon(Icons.settings_rounded), text: 'Setting'),
-            ]
-        ),
-        color: Color.fromRGBO(58, 55, 55, 1.0),                     // 탭바 색상 설정
+            ]),
+        color: Color.fromRGBO(58, 55, 55, 1.0), // 탭바 색상 설정
       ),
     );
   }

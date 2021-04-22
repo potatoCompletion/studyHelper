@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 //Setting 위젯 구현
 class Setting extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('설정 위젯 샘플')),
       body: ListView(

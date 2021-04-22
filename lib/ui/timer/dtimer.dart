@@ -13,12 +13,8 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
   AnimationController controller; //애니메이션 컨트롤러 생성
   String get timerString {
     Duration duration = controller.duration * controller.value;
-    return '${(duration.inHours).toString().padLeft(2, '0')}:${(duration
-        .inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60)
-        .toString()
-        .padLeft(2, '0')}';
+    return '${(duration.inHours).toString().padLeft(2, '0')}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   } //차감식 타이머 그래픽 안 시간
-
 
   @override
   void initState() {
@@ -28,7 +24,6 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
       duration: Duration(seconds: 5), //차감식 타이머 시간 설정
     );
   }
-
 
   @override
   void dispose() {
@@ -48,10 +43,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
           children: <Widget>[
             Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  ChangeTimerButton()
-                ]
-            ),
+                children: <Widget>[ChangeTimerButton()]),
             Expanded(
               child: Align(
                 alignment: FractionalOffset.center,
@@ -66,11 +58,11 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                             return CustomPaint(
                                 painter: TimerPainter(
                                     animation: controller,
-                                    backgroundColor: Color.fromRGBO(
-                                        105, 101, 87, 1.0),
+                                    backgroundColor:
+                                        Color.fromRGBO(105, 101, 87, 1.0),
                                     color: Color.fromRGBO(143, 7, 7, 1.0)
-                                  //themeData.indicatorColor,
-                                ));
+                                    //themeData.indicatorColor,
+                                    ));
                           },
                         ),
                       ),
@@ -83,8 +75,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                           children: <Widget>[
                             AnimatedBuilder(
                                 animation: controller,
-                                builder: (BuildContext context,
-                                    Widget child) {
+                                builder: (BuildContext context, Widget child) {
                                   return Text(
                                     _timerMention,
                                     style: themeData.textTheme.bodyText2,
@@ -92,8 +83,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                 }),
                             AnimatedBuilder(
                                 animation: controller,
-                                builder: (BuildContext context,
-                                    Widget child) {
+                                builder: (BuildContext context, Widget child) {
                                   return Text(
                                     timerString,
                                     style: themeData.textTheme.headline4,
@@ -119,7 +109,6 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                         return _setIcon;
                       },
                     ),
-
                     onPressed: () {
                       if (controller.isAnimating) {
                         controller.stop(canceled: true);
@@ -144,13 +133,11 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
     );
   }
 
-
   //차감식 타이머 버튼 아이콘 상태 판단 후 설정
   Icon get _setIcon {
     if (controller.isAnimating) {
       return Icon(Icons.pause);
-    }
-    else {
+    } else {
       return Icon(Icons.play_arrow);
     }
   }
@@ -159,8 +146,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
   String get _timerMention {
     if (controller.isAnimating) {
       return '열공중입니다...';
-    }
-    else {
+    } else {
       return '준비중입니다...';
     }
   }

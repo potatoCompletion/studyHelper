@@ -17,7 +17,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('캘린더 위젯 샘플'),
@@ -26,7 +26,9 @@ class _CalendarState extends State<Calendar> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            TableCalendar(calendarController: _controller,)
+            TableCalendar(
+              calendarController: _controller,
+            )
           ],
         ),
       ),

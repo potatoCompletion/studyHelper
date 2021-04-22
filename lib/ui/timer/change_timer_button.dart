@@ -12,23 +12,18 @@ class _ChangeTimerButtonState extends State<ChangeTimerButton> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        icon: Icon(Icons.transform,
-            color: Colors.blue,
-            size: 50
-        ),
+        icon: Icon(Icons.transform, color: Colors.blue, size: 50),
         onPressed: () {
           if (currentState == 0) {
             currentState = 1;
-          }
-          else {
+          } else {
             currentState = 0;
           }
           Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => MyTabs()),
-                    (route) => false,
-              );                                                    //MyTabs() 클래스를 재호출
-        }
-    );
+            context,
+            MaterialPageRoute(builder: (context) => MyTabs()),
+            (route) => false,
+          ); //MyTabs() 클래스를 재호출
+        });
   }
 }
