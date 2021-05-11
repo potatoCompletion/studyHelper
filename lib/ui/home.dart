@@ -12,12 +12,18 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    if (currentState == 0) {
-      return Dtimer();
-    }
-    if (currentState == 1) {
-      return Atimer();
-    }
+    // if (currentState == 0) {
+    //   return Dtimer();
+    // }
+    // if (currentState == 1) {
+    //   return Atimer();
+    // }
+    return PageView(
+      children: [
+        Dtimer(),
+        Atimer()
+      ],
+    );
   }
 }
-//TODO : PageView 사용해서 두 가지 타이머 스와이프 전환 가능하게 구현해야함. (2020-04-22)
+//TODO : PageView 사용해서 두 가지 타이머 스와이프 전환 가능하게 구현 완료. (2021-05-11)
