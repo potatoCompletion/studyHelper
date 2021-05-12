@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'timer_painter.dart';
-import 'change_timer_button.dart';
 
 // 차감식 타이머 위젯 구현
 class Dtimer extends StatefulWidget {
@@ -41,9 +40,6 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[ChangeTimerButton()]),
             Expanded(
               child: Align(
                 alignment: FractionalOffset.center,
@@ -61,7 +57,6 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                     backgroundColor:
                                         Color.fromRGBO(105, 101, 87, 1.0),
                                     color: Color.fromRGBO(143, 7, 7, 1.0)
-                                    //themeData.indicatorColor,
                                     ));
                           },
                         ),

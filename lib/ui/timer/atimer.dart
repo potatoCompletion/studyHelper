@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'change_timer_button.dart';
-
 //누적식 타이머(스톱워치) 구현
 class Atimer extends StatefulWidget {
   @override
@@ -52,11 +50,8 @@ class AtimerState extends State<Atimer> {
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[ChangeTimerButton()]),
             Text(formatTime(_stopwatch.elapsedMilliseconds),
                 style: TextStyle(fontSize: 48.0)),
             ElevatedButton(

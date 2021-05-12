@@ -7,8 +7,6 @@ import './ui/home.dart';
 
 void main() => runApp(MaterialApp(home: MyTabs()));
 
-var currentState = 0;
-
 // TabController 객체를 멤버로 만들어서 상태를 유지하기 때문에 StatefulWidget 클래스 사용
 class MyTabs extends StatefulWidget {
   @override
