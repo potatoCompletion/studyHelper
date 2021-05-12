@@ -11,7 +11,40 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return PageView(children: [Dtimer(), Atimer()]);
+    return PageView(children: [
+      AutomaticKeepAliveScreen(
+        child: Dtimer(),
+      ),
+      AutomaticKeepAliveScreen(
+        child: Atimer(),
+      )
+    ]);
   }
 }
 //TODO : PageView 사용해서 두 가지 타이머 스와이프 전환 가능하게 구현 완료. (2021-05-11)
+
+class AutomaticKeepAliveScreen extends StatefulWidget {
+  AutomaticKeepAliveScreen({
+    Key key,
+    @required Widget child,
+  })  : this.child = child,
+        assert(child != null);
+
+  final Widget child;
+
+  @override
+  _AutomaticKeepAliveScreenState createState() =>
+      _AutomaticKeepAliveScreenState();
+}
+
+class _AutomaticKeepAliveScreenState extends State<AutomaticKeepAliveScreen>
+    with AutomaticKeepAliveClientMixin {
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    return widget.child;
+  }
+}
