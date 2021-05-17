@@ -24,13 +24,12 @@ class _HomeState extends State<Home> {
 //TODO : PageView 사용해서 두 가지 타이머 스와이프 전환 가능하게 구현 완료. (2021-05-11)
 
 class AutomaticKeepAliveScreen extends StatefulWidget {
+  final Widget child;
+
   AutomaticKeepAliveScreen({
     Key key,
-    @required Widget child,
-  })  : this.child = child,
-        assert(child != null);
-
-  final Widget child;
+    @required this.child,
+  }) : assert(child != null);
 
   @override
   _AutomaticKeepAliveScreenState createState() =>
