@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -5,6 +7,8 @@ import './ui/calendar/calendar.dart';
 import './ui/rewards/reward.dart';
 import './ui/setting/setting.dart';
 import './ui/home.dart';
+import './ui/user/signup.dart';
+import './ui/user/profile.dart';
 
 void main() => runApp(MaterialApp(
       home: MyTabs(),
@@ -12,6 +16,8 @@ void main() => runApp(MaterialApp(
       // move to setting page
       routes: {
         'setting': (context) => Setting(),
+        'signup': (context) => SignUp(),
+        'profile': (context) => Profile(),
       },
     ));
 
