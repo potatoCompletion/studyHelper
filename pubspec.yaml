@@ -53,6 +53,7 @@ flutter:
   # Mac/Linux version path
     - assets/cat_sample2.png
     - assets/pushdown.jpg
+    - assets\stamp-sample.png
   # Windows version path
   #  - assets/cat_sample2.png
   #  - assets/pushdown.jpg

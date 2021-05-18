@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -165,42 +167,32 @@ class RewardCalendarPage extends StatefulWidget {
 
 class _RewardCalendarPageState extends State<RewardCalendarPage> {
   CalendarController _controller;
+  TextEditingController _eventController;
+
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now();
+
+  // calendar customize
+  Map<DateTime, List<Event>> selectedEvents;
+  DateTime _selectedDay;
+
+  List<Event> _getEventsfromDay(DateTime date) {
+    return selectedEvents[date] ?? [];
+  }
 
   @override
   void initState() {
+    selectedEvents = {};
     super.initState();
     _controller = CalendarController();
+    _eventController = TextEditingController();
   }
 
-  Container buildCalendarDay(String day, Color backColor) {
-    return Container(
-      color: Colors.grey[600],
-      width: 53,
-      height: 53,
-    );
+  @override
+  void dispose() {
+    _eventController.dispose();
+    super.dispose();
   }
-
-  AnimatedContainer buildCalendarDayMarker(String text, Color backColor) {
-    return AnimatedContainer(
-      duration: Duration(microseconds: 300),
-      decoration: BoxDecoration(
-        shape: BoxShape.rectangle,
-        image: DecorationImage(
-          image: AssetImage('assets\\stamp-sample.png'),
-        ),
-      ),
-      width: 52,
-      height: 52,
-    );
-  }
-
-  // var alertStyle = AlertStyle(
-  //   descStyle: TextStyle(
-  //     color: Colors.black,
-  //     fontWeight: FontWeight.bold,
-  //     fontSize: 20.0,
-  //   ),
-  // );
 
   @override
   Widget build(BuildContext context3) {
@@ -226,6 +218,14 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
           children: <Widget>[
             TableCalendar(
               initialCalendarFormat: CalendarFormat.month,
+              events: selectedEvents,
+              //
+              onDaySelected: (DateTime selectDay, _, __) {
+                setState(() {
+                  selectedDay = selectDay;
+                  //print(selectedDay);
+                });
+              },
               calendarStyle: CalendarStyle(
                 todayColor: Colors.blue,
                 selectedColor: Colors.green,
@@ -273,22 +273,17 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                 formatButtonShowsNext: false,
               ),
               builders: CalendarBuilders(
-                  selectedDayBuilder: (context, date, events) => Container(
+                  selectedDayBuilder: (context, date, _) => Container(
                       margin: const EdgeInsets.all(5.0),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                          //color: Theme.of(context).primaryColor,
-                          //color: Colors.grey[850],
                           border: Border.all(color: Colors.red),
-                          // image: DecorationImage(
-                          //   image: AssetImage('assets\\stamp-sample.png'),
-                          // ),
                           borderRadius: BorderRadius.circular(8.0)),
                       child: Text(
                         date.day.toString(),
                         style: TextStyle(color: Colors.white),
                       )),
-                  todayDayBuilder: (context, date, events) => Container(
+                  todayDayBuilder: (context, date, _) => Container(
                       margin: const EdgeInsets.all(5.0),
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
@@ -314,7 +309,25 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                           date.toString(),
                           style: TextStyle(color: Colors.red),
                         ),
-                      )),
+                      ),
+                  markersBuilder: (context, date, selectedEvents, _) {
+                    final children = <Widget>[];
+
+                    if (selectedEvents.isNotEmpty) {
+                      children.add(
+                        Positioned(
+                          left: 1,
+                          right: 1,
+                          top: 1,
+                          bottom: 1,
+                          child:
+                              _buildEventMarkerSub(selectedDay, selectedEvents),
+                        ),
+                      );
+                    }
+                    return children;
+                    //return;
+                  }),
               calendarController: _controller,
             ),
 
@@ -367,7 +380,23 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                                 fontSize: 18.0,
                               ),
                             ),
-                            onPressed: () => Navigator.pop(context2),
+                            //onPressed: () => Navigator.pop(context2),
+                            onPressed: () {
+                              if (selectedEvents[selectedDay] != null) {
+                                selectedEvents[selectedDay].add(
+                                  Event(""),
+                                );
+                              } else {
+                                selectedEvents[selectedDay] = [
+                                  Event(""),
+                                ];
+                              }
+                              Navigator.pop(context2);
+                              _eventController.clear();
+
+                              setState(() {});
+                              return;
+                            },
                             color: Colors.grey[600],
                             radius: BorderRadius.circular(10.0),
                           ),
@@ -383,4 +412,23 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
       ),
     );
   }
+}
+
+Widget _buildEventMarkerSub(DateTime date, List events) {
+  print("flag");
+  return buildCalendarDayMarkerSub(date, events);
+}
+
+AnimatedContainer buildCalendarDayMarkerSub(DateTime date, List events) {
+  return AnimatedContainer(
+    duration: Duration(milliseconds: 300),
+    decoration: BoxDecoration(
+      shape: BoxShape.rectangle,
+      image: DecorationImage(
+        image: AssetImage('assets\\stamp-sample.png'),
+      ),
+    ),
+    width: 53,
+    height: 53,
+  );
 }
