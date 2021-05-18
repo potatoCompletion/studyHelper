@@ -55,10 +55,10 @@ class AtimerState extends State<Atimer> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(formatTime(_stopwatch.elapsedMilliseconds),
-                style: TextStyle(color: Colors.white, fontSize: 90.0)),
+                style: TextStyle(color: Colors.white, fontSize: 70.0)),
             // making distance between Text and Button
             SizedBox(
-              height: 60.0,
+              height: 50.0,
             ),
             // Icon Box design
             SizedBox(
