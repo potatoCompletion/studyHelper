@@ -101,7 +101,8 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                 UserAccountsDrawerHeader(
                   currentAccountPicture: CircleAvatar(
                     // temporary User Image
-                    backgroundImage: AssetImage("assets\\cat_sample2.png"),
+                    //backgroundImage: AssetImage("assets\\cat_sample2.png"),
+                    backgroundImage: AssetImage("assets/cat_sample2.png"),
                     backgroundColor: Colors.grey[400],
                   ),
                   otherAccountsPictures: <Widget>[
