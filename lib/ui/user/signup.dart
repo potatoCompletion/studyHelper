@@ -7,8 +7,18 @@ class SignUp extends StatelessWidget {
       // background Color setup
       backgroundColor: Colors.grey[850],
 
+      // Scaffold element -> appBar
       appBar: AppBar(
-        title: Text("Sign Up"),
+        title: Text(
+          "Sign Up",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 17.0,
+          ),
+        ),
+        backgroundColor: Colors.grey[850],
+        elevation: 0.0,
       ),
     );
   }

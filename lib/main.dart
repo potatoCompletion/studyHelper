@@ -142,6 +142,9 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                       )),
                 ),
                 ///////Drawer Head list
+
+                //////////////////////////////////////////////////////
+                // SignIn icon
                 ListTile(
                   leading: Icon(
                     Icons.person,
@@ -189,6 +192,28 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                   //trailing: Icon(Icons.add),
                 ),
 
+                //////////////////////////////////////////////////////
+                // SignUp Icon
+                ListTile(
+                  leading: Icon(
+                    Icons.person_add,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    "SignUp",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    print("SignUp is clicked");
+                    Navigator.pushNamed(context, 'signup');
+                  },
+                  //trailing: Icon(Icons.add),
+                ),
+
+                //////////////////////////////////////////////////////
+                // Profile Icon
                 ListTile(
                   leading: Icon(
                     Icons.person_pin_rounded,
@@ -202,10 +227,13 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                   ),
                   onTap: () {
                     print("Profile is clicked");
+                    Navigator.pushNamed(context, 'profile');
                   },
                   //trailing: Icon(Icons.add),
                 ),
 
+                //////////////////////////////////////////////////////
+                // setting Icon
                 ListTile(
                   leading: Icon(
                     Icons.settings,
@@ -224,6 +252,8 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                   //trailing: Icon(Icons.add),
                 ),
 
+                //////////////////////////////////////////////////////
+                // Q&A Icon
                 ListTile(
                   leading: Icon(
                     Icons.question_answer,
