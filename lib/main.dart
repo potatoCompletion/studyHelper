@@ -237,5 +237,3 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
     );
   }
 }
-
-//민욱 깃 테스트
