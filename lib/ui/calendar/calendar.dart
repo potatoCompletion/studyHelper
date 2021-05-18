@@ -355,7 +355,8 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                         style: alertStyle,
                         title: "오늘도, 수고했어",
                         desc: "타이머의 버튼을 눌러 도장을 받으세요",
-                        image: Image.asset("assets\\pushdown.jpg"),
+                        //image: Image.asset("assets\\pushdown.jpg"),
+                        image: Image.asset("assets/pushdown.jpg"),
                         buttons: [
                           DialogButton(
                             child: Text(
