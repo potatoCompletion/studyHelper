@@ -44,20 +44,29 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[850],
-      // Scaffold element -> appBar
+      // Scaffold element - appBar
       appBar: AppBar(
         title: Text(
-          "Calendar",
+          'Touch Down Timer',
           style: TextStyle(
-            color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 17.0,
+            fontSize: 20.0,
+            color: Colors.grey[400],
           ),
         ),
+        // Color
         backgroundColor: Colors.grey[850],
-        elevation: 0.0,
+        // AppBar setting Icon
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                print("setting icon is clicked");
+                Navigator.pushNamed(context, 'setting');
+              })
+        ],
       ),
+      // Scaffold element -> body
       body: TabBarView(controller: controller, // 컨트롤러 연결
           children: [Home(), Calendar(), Reward(), Setting()]),
       bottomNavigationBar: Container(
