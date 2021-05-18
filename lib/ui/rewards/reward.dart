@@ -12,13 +12,13 @@ class _Reward extends State<Reward> {
     // TODO: implement build
     return MaterialApp(
       home: DefaultTabController(
-          length: 5,
+          length: 1,
           child: Scaffold(
               backgroundColor: Colors.grey[850],
               appBar: AppBar(
                   backgroundColor: Colors.grey[850],
                   title: Text(
-                    '업적',
+                    'Reward',
                     style: TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
@@ -36,26 +36,26 @@ class _Reward extends State<Reward> {
                   ],
                   bottom: TabBar(
                     tabs: [
-                      Tab(
+                      /*Tab(
                         text: 'GridView',
-                      ),
+                      ),*/
                       Tab(
-                        text: 'GridView.Count',
+                        text: 'Icon',
                       ),
-                      Tab(
-                        text: 'GridView.builder',
-                      ),
-                      Tab(
+                      /*Tab(
+                        text: 'List',
+                      ),*/
+                      /*Tab(
                         text: 'GridView.custom',
                       ),
                       Tab(
                         text: 'GridView.extent',
-                      ),
+                      ),*/
                     ],
                     isScrollable: true,
                   )),
               body: TabBarView(children: [
-                GridView(
+                /*GridView(
                   scrollDirection: Axis.vertical,
                   controller: ScrollController(),
                   gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -81,7 +81,7 @@ class _Reward extends State<Reward> {
                       margin: EdgeInsets.all(1.0),
                     );
                   }),
-                ),
+                ),*/
                 GridView.count(
                     crossAxisCount: 2,
                     children: List.generate(100, (index) {
@@ -89,29 +89,34 @@ class _Reward extends State<Reward> {
                         padding: EdgeInsets.all(20.0),
                         child: Center(
                           child: GridTile(
-                            footer: Text(
-                              'Item $index',
-                              textAlign: TextAlign.center,
-                            ),
-                            header: Text(
-                              'SubItem $index',
-                              textAlign: TextAlign.center,
-                            ),
-                            child: Icon(Icons.access_alarm,
-                                size: 40.0, color: Colors.white30),
-                          ),
+                              footer: Text(
+                                'Item $index',
+                                textAlign: TextAlign.center,
+                              ),
+                              header: Text(
+                                'SubItem $index',
+                                textAlign: TextAlign.center,
+                              ),
+                              child: IconButton(
+                                icon: Icon(Icons.access_alarm),
+                                color: Colors.white,
+                                iconSize: 40.0,
+                                onPressed: () {
+                                  print("Hello");
+                                },
+                              )),
                         ),
                         color: Colors.grey[600],
                         margin: EdgeInsets.all(1.0),
                       );
                     })),
-                GridView.builder(
+                /*GridView.builder(
                   itemCount: 50,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3),
                   itemBuilder: (BuildContext context, int index) {
                     //if (index < 50)
-                    return Container(
+                    /*return Container(
                       padding: EdgeInsets.all(20.0),
                       child: Center(
                         child: GridTile(
@@ -129,7 +134,7 @@ class _Reward extends State<Reward> {
                       ),
                       color: Colors.blue[400],
                       margin: EdgeInsets.all(1.0),
-                    );
+                    );*/
                   },
                 ),
                 GridView.custom(
@@ -137,7 +142,7 @@ class _Reward extends State<Reward> {
                         crossAxisCount: 3),
                     childrenDelegate:
                         SliverChildListDelegate(List.generate(100, (index) {
-                      return Container(
+                      /*return Container(
                         padding: EdgeInsets.all(20.0),
                         child: Center(
                           child: GridTile(
@@ -155,12 +160,12 @@ class _Reward extends State<Reward> {
                         ),
                         color: Colors.blue[400],
                         margin: EdgeInsets.all(1.0),
-                      );
+                      );*/
                     }))),
                 GridView.extent(
                   maxCrossAxisExtent: 200.0,
                   children: List.generate(100, (index) {
-                    return Container(
+                    /*return Container(
                       padding: EdgeInsets.all(20.0),
                       child: Center(
                         child: GridTile(
@@ -178,9 +183,9 @@ class _Reward extends State<Reward> {
                       ),
                       color: Colors.blue[400],
                       margin: EdgeInsets.all(1.0),
-                    );
+                    );*/
                   }),
-                )
+                )*/
               ]))),
     );
   }
