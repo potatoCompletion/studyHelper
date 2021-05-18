@@ -1,8 +1,16 @@
-import 'dart:html';
-
+//import 'package:universal_html/html.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+class Event {
+  final String title;
+  Event({this.title});
+
+  String toSting() => this.title;
+}
+
 
 class Calendar extends StatefulWidget {
   @override
@@ -384,11 +392,11 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                             onPressed: () {
                               if (selectedEvents[selectedDay] != null) {
                                 selectedEvents[selectedDay].add(
-                                  Event(""),
+                                  Event(title: ""),
                                 );
                               } else {
                                 selectedEvents[selectedDay] = [
-                                  Event(""),
+                                  Event(title: ""),
                                 ];
                               }
                               Navigator.pop(context2);
@@ -425,7 +433,7 @@ AnimatedContainer buildCalendarDayMarkerSub(DateTime date, List events) {
     decoration: BoxDecoration(
       shape: BoxShape.rectangle,
       image: DecorationImage(
-        image: AssetImage('assets\\stamp-sample.png'),
+        image: AssetImage('assets/stamp-sample.png'),
       ),
     ),
     width: 53,

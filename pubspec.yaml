@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  universal_html: ^2.0.8
   provider: ^4.3.1
   rflutter_alert: ^1.0.3
   table_calendar: ^2.1.0
@@ -53,10 +54,11 @@ flutter:
   # Mac/Linux version path
     - assets/cat_sample2.png
     - assets/pushdown.jpg
-    - assets\stamp-sample.png
+    - assets/stamp-sample.png
   # Windows version path
-  #  - assets/cat_sample2.png
-  #  - assets/pushdown.jpg
+  #  - assets\cat_sample2.png
+  #  - assets\pushdown.jpg
+  #  - assets\stamp-sample.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
