@@ -20,7 +20,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 5), //차감식 타이머 시간 설정
+      duration: Duration(seconds: 3), //차감식 타이머 시간 설정
     );
   }
 
@@ -48,6 +48,10 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                   child: Stack(
                     children: <Widget>[
                       Positioned.fill(
+                        top: 25.0,
+                        left: 25.0,
+                        right: 25.0,
+                        bottom: 25.0,
                         child: AnimatedBuilder(
                           animation: controller,
                           builder: (BuildContext context, Widget child) {
@@ -55,33 +59,48 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                 painter: TimerPainter(
                                     animation: controller,
                                     backgroundColor:
-                                        Color.fromRGBO(105, 101, 87, 1.0),
-                                    color: Color.fromRGBO(143, 7, 7, 1.0)
-                                    ));
+                                        Color.fromRGBO(104, 104, 104, 1.0),
+                                    color: Color.fromRGBO(143, 7, 7, 1.0)));
                           },
                         ),
                       ),
                       Align(
                         alignment: FractionalOffset.center,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           //차감식 타이머 멘션 스트링, 타이머 남은 시간 스트링 두개 정렬 및 나열
                           children: <Widget>[
+                            // First Animated Builder -> Text
                             AnimatedBuilder(
                                 animation: controller,
                                 builder: (BuildContext context, Widget child) {
                                   return Text(
                                     _timerMention,
-                                    style: themeData.textTheme.bodyText2,
+                                    //style: themeData.textTheme.bodyText2,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   );
                                 }),
+                            // Sized Box for Aligning between two AnimatedBuilders
+                            SizedBox(
+                              height: 50.0,
+                            ),
+                            // Second Animated Builder -> Numerical value
                             AnimatedBuilder(
                                 animation: controller,
                                 builder: (BuildContext context, Widget child) {
                                   return Text(
                                     timerString,
-                                    style: themeData.textTheme.headline4,
+                                    //style: themeData.textTheme.headline4,
+                                    style: TextStyle(
+                                      fontSize: 40.0,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   );
                                 }),
                           ],
@@ -121,10 +140,15 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                 ],
               ),
             ),
+            // sizedBox for Aligning
+            SizedBox(
+              height: 120.0,
+            ),
           ],
         ),
       ),
-      backgroundColor: Color.fromRGBO(241, 227, 190, 1.0),
+      //backgroundColor: Color.fromRGBO(241, 227, 190, 1.0),
+      backgroundColor: Colors.grey[850],
     );
   }
 
@@ -140,9 +164,9 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
 //차감식 타이머 멘트 설정
   String get _timerMention {
     if (controller.isAnimating) {
-      return '열공중입니다...';
+      return '열공중입니다';
     } else {
-      return '준비중입니다...';
+      return '준비중입니다';
     }
   }
 }
