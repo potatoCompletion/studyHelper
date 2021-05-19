@@ -1,16 +1,7 @@
-//import 'package:universal_html/html.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/ui/global-variable/global-state.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:table_calendar/table_calendar.dart';
-
-class Event {
-  final String title;
-  Event({this.title});
-
-  String toSting() => this.title;
-}
-
 
 class Calendar extends StatefulWidget {
   @override
@@ -181,7 +172,6 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
   DateTime focusedDay = DateTime.now();
 
   // calendar customize
-  Map<DateTime, List<Event>> selectedEvents;
   DateTime _selectedDay;
 
   List<Event> _getEventsfromDay(DateTime date) {
@@ -190,7 +180,7 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
 
   @override
   void initState() {
-    selectedEvents = {};
+    //selectedEvents = {};
     super.initState();
     _controller = CalendarController();
     _eventController = TextEditingController();
@@ -423,7 +413,6 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
 }
 
 Widget _buildEventMarkerSub(DateTime date, List events) {
-  print("flag");
   return buildCalendarDayMarkerSub(date, events);
 }
 

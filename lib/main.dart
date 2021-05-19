@@ -8,10 +8,12 @@ import './ui/home.dart';
 import './ui/user/signup.dart';
 import './ui/user/profile.dart';
 
+//import './ui/global-variable/global-state.dart';
+
 void main() => runApp(MaterialApp(
       home: MyTabs(),
       debugShowCheckedModeBanner: false,
-      // move to setting page
+      // move to other pages
       routes: {
         'setting': (context) => Setting(),
         'signup': (context) => SignUp(),
