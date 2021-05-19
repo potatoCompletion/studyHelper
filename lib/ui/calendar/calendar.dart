@@ -601,7 +601,7 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                                       style: alertStyle,
                                       title: "이대로만 가자!",
                                       desc: "7일 연속 수고했어!",
-                                      image: Image.asset("assets\\reward7.png"),
+                                      image: Image.asset("assets/reward7.png"),
                                       buttons: [
                                         DialogButton(
                                           child: Text(
