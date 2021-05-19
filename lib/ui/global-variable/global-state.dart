@@ -40,6 +40,9 @@ class Event {
 // Keep specific events that represent that user has received stamp
 Map<DateTime, List<Event>> selectedEvents = {};
 
+// reward day count
+var stampDayCount = 0;
+
 //////////////////////////////////////////////////////////
 /// Reward
 //////////////////////////////////////////////////////////
