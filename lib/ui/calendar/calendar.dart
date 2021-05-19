@@ -58,13 +58,33 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
+  // Calendar & Stamp image controller
   CalendarController _controller;
+  TextEditingController _eventController;
 
-  // Calendar initial Setup
+  // Variable for day control
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now();
+  DateTime _selectedDay;
+
+  // input occured event data
+  List<Event> _getEventsfromDay(DateTime date) {
+    return selectedEvents[date] ?? [];
+  }
+
+  // controller initialization
   @override
   void initState() {
     super.initState();
     _controller = CalendarController();
+    _eventController = TextEditingController();
+  }
+
+  // event list elemet disposal
+  @override
+  void dispose() {
+    _eventController.dispose();
+    super.dispose();
   }
 
   // Calendar format which is for Main Page
@@ -102,13 +122,26 @@ class _CalendarState extends State<Calendar> {
               initialCalendarFormat: CalendarFormat.month,
 
               ////////////////////////////////////////
+              /// TableCalendar element -> event
+              events: selectedEvents,
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> onDaySelected
+              onDaySelected: (DateTime selectDay, _, __) {
+                setState(() {
+                  selectedDay = selectDay;
+                  //print(selectedDay);
+                });
+              },
+
+              ////////////////////////////////////////
               /// TableCalendar element -> calendarStyle
               calendarStyle: CalendarStyle(
                 //// Today Tile color
                 todayColor: Colors.blue,
 
                 //// Selected day tile color
-                selectedColor: Colors.green,
+                selectedColor: Colors.amber[100],
 
                 //// Today Style -> text color
                 todayStyle: TextStyle(
@@ -131,6 +164,14 @@ class _CalendarState extends State<Calendar> {
                 weekdayStyle: TextStyle(
                   color: Colors.white,
                 ),
+
+                //// eventday Style -> text color
+                eventDayStyle: TextStyle(
+                  color: Colors.white,
+                ),
+
+                //// marker Style -> marker color
+                markersColor: Colors.green[700],
               ),
 
               ////////////////////////////////////////
@@ -163,42 +204,43 @@ class _CalendarState extends State<Calendar> {
               ////////////////////////////////////////
               /// TableCalendar element -> builder
               builders: CalendarBuilders(
-                  selectedDayBuilder: (context, date, events) => Container(
-                      margin: const EdgeInsets.all(5.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: Text(
-                        date.day.toString(),
-                        style: TextStyle(color: Colors.white),
-                      )),
-                  todayDayBuilder: (context, date, events) => Container(
-                      margin: const EdgeInsets.all(5.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: Text(
-                        date.day.toString(),
-                        style: TextStyle(color: Colors.white),
-                      )),
-                  dowWeekdayBuilder: (context, date) => Container(
-                        margin: const EdgeInsets.all(5.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          date.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                  dowWeekendBuilder: (context, date) => Container(
-                        margin: const EdgeInsets.all(5.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          date.toString(),
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      )),
+                selectedDayBuilder: (context, date, events) => Container(
+                    margin: const EdgeInsets.all(5.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.amber[100]),
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: Text(
+                      date.day.toString(),
+                      style: TextStyle(color: Colors.white),
+                    )),
+                todayDayBuilder: (context, date, events) => Container(
+                    margin: const EdgeInsets.all(5.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: Text(
+                      date.day.toString(),
+                      style: TextStyle(color: Colors.white),
+                    )),
+                dowWeekdayBuilder: (context, date) => Container(
+                  margin: const EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    date.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                dowWeekendBuilder: (context, date) => Container(
+                  margin: const EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    date.toString(),
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ),
 
               ////////////////////////////////////////
               /// TableCalendar element -> calendarController
@@ -353,6 +395,10 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                 weekdayStyle: TextStyle(
                   color: Colors.white,
                 ),
+                //// eventday Style -> text color
+                eventDayStyle: TextStyle(
+                  color: Colors.white,
+                ),
               ),
 
               ////////////////////////////////////////
@@ -385,66 +431,67 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
               ////////////////////////////////////////
               /// TableCalendar element -> builders
               builders: CalendarBuilders(
-                  selectedDayBuilder: (context, date, _) => Container(
-                      margin: const EdgeInsets.all(5.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.red),
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: Text(
-                        date.day.toString(),
-                        style: TextStyle(color: Colors.white),
-                      )),
-                  todayDayBuilder: (context, date, _) => Container(
-                      margin: const EdgeInsets.all(5.0),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.blue),
-                          //color: Colors.blue,
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: Text(
-                        date.day.toString(),
-                        style: TextStyle(color: Colors.white),
-                      )),
-                  dowWeekdayBuilder: (context, date) => Container(
-                        margin: const EdgeInsets.all(5.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          date.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                  dowWeekendBuilder: (context, date) => Container(
-                        margin: const EdgeInsets.all(5.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          date.toString(),
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      ),
+                selectedDayBuilder: (context, date, _) => Container(
+                    margin: const EdgeInsets.all(5.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.amber[100]),
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: Text(
+                      date.day.toString(),
+                      style: TextStyle(color: Colors.white),
+                    )),
+                todayDayBuilder: (context, date, _) => Container(
+                    margin: const EdgeInsets.all(5.0),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                        //color: Colors.blue,
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: Text(
+                      date.day.toString(),
+                      style: TextStyle(color: Colors.white),
+                    )),
+                dowWeekdayBuilder: (context, date) => Container(
+                  margin: const EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    date.toString(),
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                dowWeekendBuilder: (context, date) => Container(
+                  margin: const EdgeInsets.all(5.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    date.toString(),
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
 
-                  ////////////////////////////////////////
-                  // event day control builder
-                  markersBuilder: (context, date, selectedEvents, _) {
-                    final children = <Widget>[];
+                ////////////////////////////////////////
+                // event day control builder
+                markersBuilder: (context, date, selectedEvents, _) {
+                  final children = <Widget>[];
 
-                    // stamp image position
-                    if (selectedEvents.isNotEmpty) {
-                      children.add(
-                        Positioned(
-                          left: 1,
-                          right: 1,
-                          top: 1,
-                          bottom: 1,
-                          // jump to function which is for load image
-                          child:
-                              _buildEventMarkerSub(selectedDay, selectedEvents),
-                        ),
-                      );
-                    }
-                    return children;
-                    //return;
-                  }),
+                  // stamp image position
+                  if (selectedEvents.isNotEmpty) {
+                    children.add(
+                      Positioned(
+                        left: 1,
+                        right: 1,
+                        top: 1,
+                        bottom: 1,
+                        // jump to function which is for load image
+                        child:
+                            _buildEventMarkerSub(selectedDay, selectedEvents),
+                      ),
+                    );
+                  }
+                  return children;
+                  //return;
+                },
+              ),
 
               ////////////////////////////////////////
               /// TableCalendar element -> calendarController
