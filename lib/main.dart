@@ -1,14 +1,14 @@
+// Package List
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+// Sub Page List
 import './ui/calendar/calendar.dart';
 import './ui/rewards/reward.dart';
 import './ui/setting/setting.dart';
 import './ui/home.dart';
 import './ui/user/signup.dart';
 import './ui/user/profile.dart';
-
-//import './ui/global-variable/global-state.dart';
 
 void main() => runApp(MaterialApp(
       home: MyTabs(),
