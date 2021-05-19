@@ -558,7 +558,6 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                             /// button reaction
                             onPressed: () {
                               stampDayCount += 1;
-                              print(stampDayCount);
                               // image load
                               if (selectedEvents[selectedDay] != null) {
                                 selectedEvents[selectedDay].add(
