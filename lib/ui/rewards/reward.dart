@@ -11,6 +11,7 @@ class _Reward extends State<Reward> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: DefaultTabController(
           length: 1,
           child: Scaffold(
@@ -26,14 +27,6 @@ class _Reward extends State<Reward> {
                     ),
                   ),
                   centerTitle: true,
-                  actions: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.settings),
-                      onPressed: () {
-                        print("hello");
-                      },
-                    ),
-                  ],
                   bottom: TabBar(
                     tabs: [
                       /*Tab(
