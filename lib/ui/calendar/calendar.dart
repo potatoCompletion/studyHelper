@@ -3,6 +3,38 @@ import 'package:flutter_basic/ui/global-variable/global-state.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+/**
+ - Page Layout
+ -
+ -
+ -- Main Page----------------------------------------------
+
+ - Page access  -> press 'calendar' button on Tab bar which is locatted in bellow
+ - Page Concept -> Normal Calendar 
+ - Page context -> it has imformations about user's achievement
+ -              -> two states of achievement       
+ -         
+ -              -> first state  -> succeded to receive stamp -> red color
+ -              -> Second state -> failed to receive stamp   -> green color
+ - 
+ - Button       -> used for jumping to sub page
+ -
+ -- Sub Page-----------------------------------------------
+
+ - Page access  -> press Button located right bellow Calendar in Main Page
+ - Page Concept -> Reward Calendar
+ - Page context -> it has several user-interactive factors such as button etc
+ - 
+ - 
+ - Button       -> User can get Daily reward through this button
+ - 
+ - Alert        -> show information that show how to get stamp using timer to user
+ - 
+ **/
+
+/////////////////////////////////////////////////////////////////////////
+// Main Page
+/////////////////////////////////////////////////////////////////////////
 class Calendar extends StatefulWidget {
   @override
   _CalendarState createState() => _CalendarState();
@@ -11,16 +43,20 @@ class Calendar extends StatefulWidget {
 class _CalendarState extends State<Calendar> {
   CalendarController _controller;
 
+  // Calendar initial Setup
   @override
   void initState() {
     super.initState();
     _controller = CalendarController();
   }
 
+  // Calendar format which is for Main Page
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[850],
+
+      ////////////////////////////////////////
       // Scaffold element -> appBar
       appBar: AppBar(
         title: Text(
@@ -34,35 +70,54 @@ class _CalendarState extends State<Calendar> {
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
       ),
+
+      ////////////////////////////////////////
       // Scaffold element -> body
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            ////////////////////////////////////////
+            /// Scaffold-body -> 1st Widget -> TableCalendar
             TableCalendar(
+              ////////////////////////////////////////
+              /// TableCalendar element -> initialCalendarFormat
               initialCalendarFormat: CalendarFormat.month,
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> calendarStyle
               calendarStyle: CalendarStyle(
+                //// Today Tile color
                 todayColor: Colors.blue,
+
+                //// Selected day tile color
                 selectedColor: Colors.green,
-                //// Today Style
+
+                //// Today Style -> text color
                 todayStyle: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22.0,
                   color: Colors.white,
                 ),
-                //// OutSide Style
+
+                //// OutSide Style -> text color
                 outsideStyle: TextStyle(
                   color: Colors.grey,
                 ),
-                //// OutSide-Weekends Style
+
+                //// OutSide-Weekends Style -> text color
                 outsideWeekendStyle: TextStyle(
                   color: Colors.red[200],
                 ),
-                //// Weekdays Style
+
+                //// Weekdays Style -> text color
                 weekdayStyle: TextStyle(
                   color: Colors.white,
                 ),
               ),
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> headerStyle
               headerStyle: HeaderStyle(
                 centerHeaderTitle: true,
                 titleTextStyle: TextStyle(
@@ -87,6 +142,9 @@ class _CalendarState extends State<Calendar> {
                 ),
                 formatButtonShowsNext: false,
               ),
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> builder
               builders: CalendarBuilders(
                   selectedDayBuilder: (context, date, events) => Container(
                       margin: const EdgeInsets.all(5.0),
@@ -124,10 +182,14 @@ class _CalendarState extends State<Calendar> {
                           style: TextStyle(color: Colors.red),
                         ),
                       )),
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> calendarController
               calendarController: _controller,
             ),
 
-            //// Raised Button
+            ////////////////////////////////////////
+            /// Scaffold-body -> 2nd Widget -> Raisedbutton
             Builder(builder: (BuildContext context2) {
               return Container(
                 child: Align(
@@ -139,6 +201,9 @@ class _CalendarState extends State<Calendar> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+
+                    ////////////////////////////////////////
+                    /// button reaction
                     onPressed: () {
                       Navigator.push(
                           context2,
@@ -165,37 +230,42 @@ class RewardCalendarPage extends StatefulWidget {
 }
 
 class _RewardCalendarPageState extends State<RewardCalendarPage> {
+  // Calendar & Stamp image controller
   CalendarController _controller;
   TextEditingController _eventController;
 
+  // Variable for day control
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
-
-  // calendar customize
   DateTime _selectedDay;
 
+  // input occured event data
   List<Event> _getEventsfromDay(DateTime date) {
     return selectedEvents[date] ?? [];
   }
 
+  // controller initialization
   @override
   void initState() {
-    //selectedEvents = {};
     super.initState();
     _controller = CalendarController();
     _eventController = TextEditingController();
   }
 
+  // event list elemet disposal
   @override
   void dispose() {
     _eventController.dispose();
     super.dispose();
   }
 
+  // Calendar format which is for Sub Page
   @override
   Widget build(BuildContext context3) {
     return Scaffold(
       backgroundColor: Colors.grey[850],
+
+      ////////////////////////////////////////
       // Scaffold element -> appBar
       appBar: AppBar(
         title: Text(
@@ -209,43 +279,67 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
       ),
+
+      ////////////////////////////////////////
       // Scaffold element -> body
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            ////////////////////////////////////////
+            /// Scaffold-body -> 1st Widget -> TableCalendar
             TableCalendar(
+              ////////////////////////////////////////
+              /// TableCalendar element -> initialCalendarFormat
               initialCalendarFormat: CalendarFormat.month,
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> event
               events: selectedEvents,
-              //
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> onDaySelected
               onDaySelected: (DateTime selectDay, _, __) {
                 setState(() {
                   selectedDay = selectDay;
                   //print(selectedDay);
                 });
               },
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> calendarStyle
               calendarStyle: CalendarStyle(
+                //// Today Tile color
                 todayColor: Colors.blue,
+
+                //// Selected day tile color
                 selectedColor: Colors.green,
-                //// Today Style
+
+                //// Today Style -> text color
                 todayStyle: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 22.0,
                   color: Colors.white,
                 ),
-                //// OutSide Style
+
+                //// OutSide Style -> text color
                 outsideStyle: TextStyle(
                   color: Colors.grey,
                 ),
-                //// OutSide-Weekends Style
+
+                //// OutSide-Weekends Style -> text color
                 outsideWeekendStyle: TextStyle(
                   color: Colors.red[200],
                 ),
-                //// Weekdays Style
+
+                //// Weekdays Style -> text color
                 weekdayStyle: TextStyle(
                   color: Colors.white,
                 ),
               ),
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> headerStyle
               headerStyle: HeaderStyle(
                 centerHeaderTitle: true,
                 titleTextStyle: TextStyle(
@@ -270,6 +364,9 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                 ),
                 formatButtonShowsNext: false,
               ),
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> builders
               builders: CalendarBuilders(
                   selectedDayBuilder: (context, date, _) => Container(
                       margin: const EdgeInsets.all(5.0),
@@ -308,9 +405,13 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                           style: TextStyle(color: Colors.red),
                         ),
                       ),
+
+                  ////////////////////////////////////////
+                  // event day control builder
                   markersBuilder: (context, date, selectedEvents, _) {
                     final children = <Widget>[];
 
+                    // stamp image position
                     if (selectedEvents.isNotEmpty) {
                       children.add(
                         Positioned(
@@ -318,6 +419,7 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                           right: 1,
                           top: 1,
                           bottom: 1,
+                          // jump to function which is for load image
                           child:
                               _buildEventMarkerSub(selectedDay, selectedEvents),
                         ),
@@ -326,10 +428,14 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                     return children;
                     //return;
                   }),
+
+              ////////////////////////////////////////
+              /// TableCalendar element -> calendarController
               calendarController: _controller,
             ),
 
-            //// Snack Bar
+            ////////////////////////////////////////
+            /// Scaffold-body -> 2nd Widget -> Raisedbutton
             Builder(builder: (BuildContext context2) {
               return Container(
                 child: Align(
@@ -341,6 +447,9 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+
+                    ////////////////////////////////////////
+                    /// button reaction
                     onPressed: () {
                       var alertStyle = AlertStyle(
                         descStyle: TextStyle(
@@ -361,6 +470,8 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                         ),
                       );
 
+                      ////////////////////////////////////////
+                      /// pop up message
                       Alert(
                         context: context2,
                         style: alertStyle,
@@ -378,7 +489,9 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                                 fontSize: 18.0,
                               ),
                             ),
-                            //onPressed: () => Navigator.pop(context2),
+
+                            ////////////////////////////////////////
+                            /// button reaction
                             onPressed: () {
                               if (selectedEvents[selectedDay] != null) {
                                 selectedEvents[selectedDay].add(
@@ -412,10 +525,14 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
   }
 }
 
+////////////////////////////////////////
+/// pre-function for Marker image setup
 Widget _buildEventMarkerSub(DateTime date, List events) {
   return buildCalendarDayMarkerSub(date, events);
 }
 
+////////////////////////////////////////
+/// main-function for Marker image setup
 AnimatedContainer buildCalendarDayMarkerSub(DateTime date, List events) {
   return AnimatedContainer(
     duration: Duration(milliseconds: 300),
