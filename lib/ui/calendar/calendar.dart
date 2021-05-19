@@ -557,6 +557,9 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                             ////////////////////////////////////////
                             /// button reaction
                             onPressed: () {
+                              stampDayCount += 1;
+                              print(stampDayCount);
+                              // image load
                               if (selectedEvents[selectedDay] != null) {
                                 selectedEvents[selectedDay].add(
                                   Event(title: ""),
@@ -566,7 +569,69 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                                   Event(title: ""),
                                 ];
                               }
-                              Navigator.pop(context2);
+
+                              // reward manage
+                              switch (stampDayCount) {
+                                // count 3
+                                case 3:
+                                  {
+                                    // Snack Bar setup
+                                    Scaffold.of(context2).showSnackBar(SnackBar(
+                                      content: Text(
+                                        "작심삼일이 뭔데???",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20.0,
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.teal,
+                                      duration: Duration(milliseconds: 2500),
+                                    ));
+                                    Navigator.pop(context2);
+                                  }
+                                  break;
+
+                                // count 7
+                                case 7:
+                                  {
+                                    Navigator.pop(context2);
+                                    Alert(
+                                      context: context2,
+                                      style: alertStyle,
+                                      title: "이대로만 가자!",
+                                      desc: "7일 연속 수고했어!",
+                                      image: Image.asset("assets\\reward7.png"),
+                                      buttons: [
+                                        DialogButton(
+                                          child: Text(
+                                            "메달 받기",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              fontSize: 18.0,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pop(context2);
+                                          },
+                                          color: Colors.grey[600],
+                                          radius: BorderRadius.circular(10.0),
+                                        ),
+                                      ],
+                                    ).show();
+                                  }
+                                  break;
+
+                                // default
+                                default:
+                                  {
+                                    Navigator.pop(context2);
+                                  }
+                                  break;
+                              }
+
+                              //Navigator.pop(context2);
                               _eventController.clear();
 
                               setState(() {});
