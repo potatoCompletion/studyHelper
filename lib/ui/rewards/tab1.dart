@@ -10,6 +10,7 @@ class _Tab1State extends State<Tab1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[850],
       body: Container(
         child: GridView.builder(
             itemCount: 50,
