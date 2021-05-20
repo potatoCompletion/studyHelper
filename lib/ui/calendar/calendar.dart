@@ -621,7 +621,7 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                                           onPressed: () {
                                             Navigator.pop(context2);
                                           },
-                                          color: Colors.grey[600],
+                                          color: Colors.grey[850],
                                           radius: BorderRadius.circular(10.0),
                                         ),
                                       ],
