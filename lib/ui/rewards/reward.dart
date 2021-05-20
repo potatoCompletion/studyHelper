@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_basic/main.dart';
 import 'package:scratcher/scratcher.dart';
+import './tab1.dart';
 
 class Reward extends StatefulWidget {
   @override
   _Reward createState() => _Reward();
 }
 
-class _Reward extends State<Reward> {
+class _Reward extends State<Reward> with SingleTickerProviderStateMixin {
+  final List<Tab> rewardTabs = <Tab>[
+    Tab(
+      text: 'icon',
+      icon: Icon(Icons.alarm_sharp),
+    ),
+  ];
+
+  TabController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = TabController(vsync: this, length: rewardTabs.length);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -21,33 +43,36 @@ class _Reward extends State<Reward> {
                   title: Text(
                     'Reward',
                     style: TextStyle(
-                      color: Colors.red,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
+                      fontSize: 17.0,
                     ),
                   ),
-                  centerTitle: true,
+                  //centerTitle: true,
                   bottom: TabBar(
+                    controller: controller,
                     tabs: [
+                      Tab(
+                        icon: Icon(Icons.av_timer),
+                        text: 'Timer',
+                      ),
                       /*Tab(
-                        text: 'GridView',
-                      ),*/
+                        text: 'Icon',
+                      ),
                       Tab(
                         text: 'Icon',
                       ),
-                      /*Tab(
-                        text: 'List',
-                      ),*/
-                      /*Tab(
-                        text: 'GridView.custom',
+                      Tab(
+                        text: 'Icon',
                       ),
                       Tab(
-                        text: 'GridView.extent',
+                        text: 'Icon',
                       ),*/
                     ],
                     isScrollable: true,
                   )),
-              body: TabBarView(children: [
+              body: TabBarView(controller: controller, children: [
+                Tab1(),
                 /*GridView(
                   scrollDirection: Axis.vertical,
                   controller: ScrollController(),
@@ -75,7 +100,7 @@ class _Reward extends State<Reward> {
                     );
                   }),
                 ),*/
-                GridView.count(
+                /*GridView.count(
                     crossAxisCount: 2,
                     children: List.generate(100, (index) {
                       return Container(
@@ -103,13 +128,13 @@ class _Reward extends State<Reward> {
                         margin: EdgeInsets.all(1.0),
                       );
                     })),
-                /*GridView.builder(
+                 GridView.builder(
                   itemCount: 50,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3),
                   itemBuilder: (BuildContext context, int index) {
                     //if (index < 50)
-                    /*return Container(
+                    return Container(
                       padding: EdgeInsets.all(20.0),
                       child: Center(
                         child: GridTile(
@@ -127,7 +152,7 @@ class _Reward extends State<Reward> {
                       ),
                       color: Colors.blue[400],
                       margin: EdgeInsets.all(1.0),
-                    );*/
+                    );
                   },
                 ),
                 GridView.custom(
@@ -135,7 +160,7 @@ class _Reward extends State<Reward> {
                         crossAxisCount: 3),
                     childrenDelegate:
                         SliverChildListDelegate(List.generate(100, (index) {
-                      /*return Container(
+                      return Container(
                         padding: EdgeInsets.all(20.0),
                         child: Center(
                           child: GridTile(
@@ -153,12 +178,12 @@ class _Reward extends State<Reward> {
                         ),
                         color: Colors.blue[400],
                         margin: EdgeInsets.all(1.0),
-                      );*/
+                      );
                     }))),
                 GridView.extent(
                   maxCrossAxisExtent: 200.0,
                   children: List.generate(100, (index) {
-                    /*return Container(
+                    return Container(
                       padding: EdgeInsets.all(20.0),
                       child: Center(
                         child: GridTile(
@@ -176,7 +201,7 @@ class _Reward extends State<Reward> {
                       ),
                       color: Colors.blue[400],
                       margin: EdgeInsets.all(1.0),
-                    );*/
+                    );
                   }),
                 )*/
               ]))),
