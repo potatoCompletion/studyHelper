@@ -551,7 +551,7 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                         buttons: [
                           DialogButton(
                             child: Text(
-                              "이해했습니다",
+                              "알겠습니다",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey[200],
