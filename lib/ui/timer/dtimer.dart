@@ -39,7 +39,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(8.0),
-        child: Column(
+        child: Stack(children: <Widget>[Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Expanded(
@@ -146,7 +146,19 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
             )
           ],
         ),
-      ),
+          Positioned(
+              left: 0,
+              bottom: 10,
+              child: FloatingActionButton(
+                backgroundColor: Colors.deepOrange,
+                onPressed: () {
+                 _reset();
+                },
+                child: Icon(Icons.rotate_left),
+              )),
+          ],
+        ),
+        ),
       //backgroundColor: Color.fromRGBO(241, 227, 190, 1.0),
       backgroundColor: Colors.grey[850],
     );
@@ -186,6 +198,13 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
     } else {
       return '준비중입니다';
     }
+  }
+
+  void _reset() {
+    setState(() {
+      controller.reset();
+      timerVal.stopCount = 0;
+    });
   }
 }
 //TODO : 초기화 버튼 만들어

@@ -48,46 +48,67 @@ class AtimerState extends State<Atimer> {
     setState(() {}); // re-render the page
   }
 
+  void _reset() {
+    setState(() {
+      _stopwatch.reset();
+      timerVal.stopCount = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // Background Color setup
       backgroundColor: Colors.grey[850],
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(formatTime(_stopwatch.elapsedMilliseconds),
-                style: TextStyle(color: Colors.white, fontSize: 70.0)),
-            // making distance between Text and Button
-            SizedBox(
-              height: 50.0,
-            ),
-            stopCountMention,
-            SizedBox(
-              height: 50.0,
-            ),
-            // Icon Box design
-            SizedBox(
-              // Icon Box attributes
-              height: 50.0,
-              width: 120.0,
-              // box child -> Elevated Button
-              child: ElevatedButton(
-                  onPressed: () {
-                    handleStartStop();
-                   },
-                  child: Text(
-                    _stopwatch.isRunning ? 'Stop' : 'Start',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25.0,
-                      //fontWeight: FontWeight.bold,
-                    ),
-                  )),
-            ),
-          ],
-        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top:30),
+            child: Stack(children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(formatTime(_stopwatch.elapsedMilliseconds),
+                  style: TextStyle(color: Colors.white, fontSize: 70.0)),
+              // making distance between Text and Button
+              SizedBox(
+                height: 50.0,
+              ),
+              stopCountMention,
+              SizedBox(
+                height: 50.0,
+              ),
+              // Icon Box design
+              SizedBox(
+                // Icon Box attributes
+                height: 50.0,
+                width: 120.0,
+                // box child -> Elevated Button
+                child: ElevatedButton(
+                    onPressed: () {
+                      handleStartStop();
+                    },
+                    child: Text(
+                      _stopwatch.isRunning ? 'Stop' : 'Start',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25.0,
+                        //fontWeight: FontWeight.bold,
+                      ),
+                    )),
+              ),
+            ],
+          ),
+          Positioned(
+              left: 0,
+              bottom: 10,
+              child: FloatingActionButton(
+                backgroundColor: Colors.deepOrange,
+                onPressed: () {
+                  _reset();
+                },
+                child: Icon(Icons.rotate_left),
+              )),
+        ])),
       ),
     );
   }
