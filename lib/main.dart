@@ -12,6 +12,7 @@ import './ui/user/signup.dart';
 import './ui/user/profile.dart';
 
 void main() {
+  // mobile device system Navigator Bar which is in bellow, -> color theme: dark mode
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.grey[900],
   ));
