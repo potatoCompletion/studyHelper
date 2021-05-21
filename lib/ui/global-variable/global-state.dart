@@ -42,6 +42,7 @@ Map<DateTime, List<Event>> selectedEvents = {};
 
 // reward day count
 var stampDayCount = 0;
+var _itemCount = 50;
 
 //////////////////////////////////////////////////////////
 /// Reward

@@ -7,9 +7,13 @@ class Tab1 extends StatefulWidget {
 }
 
 class _Tab1State extends State<Tab1> {
+  List<int> zero = [0];
+  List<int> rewardMap=
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[850],
       body: Container(
         child: GridView.builder(
             itemCount: 50,
@@ -28,15 +32,17 @@ class _Tab1State extends State<Tab1> {
 
 BoxDecoration gridState(int index) {
   switch (stampDayCount) {
-    case 2:
+    case 3:
       {
-        return BoxDecoration(
-          color: Colors.grey[600],
-          shape: BoxShape.rectangle,
-          image: DecorationImage(
-            image: AssetImage("assets/reward7.png"),
-          ),
-        );
+        if (stampDayCount == index) {
+          return BoxDecoration(
+            color: Colors.grey[600],
+            shape: BoxShape.rectangle,
+            image: DecorationImage(
+              image: AssetImage("assets/reward7.png"),
+            ),
+          );
+        }
         //specificGirdStyle(0);
       }
       break;
