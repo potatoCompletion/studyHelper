@@ -15,9 +15,9 @@ void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       // move to other pages
       routes: {
-        'setting': (context) => Setting(),
         'signup': (context) => SignUp(),
         'profile': (context) => Profile(),
+        'setting': (context) => Setting()
       },
     ));
 
@@ -41,7 +41,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
 
     // SingleTickerProviderStateMixin를 상속 받아서
     // vsync에 this 형태로 전달해야 애니메이션이 정상 처리된다.
-    controller = TabController(vsync: this, length: 4);
+    controller = TabController(vsync: this, length: 3);
   }
 
   // initState 함수의 반대.
@@ -79,7 +79,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
       ),
       // Scaffold element -> body
       body: TabBarView(controller: controller, // 컨트롤러 연결
-          children: [Home(), Calendar(), Reward(), Setting()]),
+          children: [Home(), Calendar(), Reward()]),
       bottomNavigationBar: Container(
         child: TabBar(controller: controller, // 컨트롤러 연결
             tabs: [
@@ -90,7 +90,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                 text: 'Calendar',
               ),
               Tab(icon: Icon(Icons.card_giftcard), text: 'Reward'),
-              Tab(icon: Icon(Icons.settings_rounded), text: 'Setting'),
+              //Tab(icon: Icon(Icons.settings_rounded), text: 'Setting'),
             ]),
         color: Color.fromRGBO(58, 55, 55, 1.0), // 탭바 색상 설정
       ),
@@ -228,26 +228,6 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                   onTap: () {
                     print("Profile is clicked");
                     Navigator.pushNamed(context, 'profile');
-                  },
-                  //trailing: Icon(Icons.add),
-                ),
-
-                //////////////////////////////////////////////////////
-                // setting Icon
-                ListTile(
-                  leading: Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    "setting",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onTap: () {
-                    print("setting is clicked");
-                    Navigator.pushNamed(context, 'setting');
                   },
                   //trailing: Icon(Icons.add),
                 ),

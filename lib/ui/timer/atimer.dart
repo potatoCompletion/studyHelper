@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import '../global-variable/global-state.dart';
 
 //누적식 타이머(스톱워치) 구현
 class Atimer extends StatefulWidget {
@@ -11,6 +12,7 @@ class Atimer extends StatefulWidget {
 class AtimerState extends State<Atimer> {
   Stopwatch _stopwatch;
   Timer _timer;
+  var timerVal = new TimerVal();
 
   String formatTime(int milliseconds) {
     var secs = milliseconds ~/ 1000;
@@ -67,7 +69,13 @@ class AtimerState extends State<Atimer> {
               width: 120.0,
               // box child -> Elevated Button
               child: ElevatedButton(
-                  onPressed: handleStartStop,
+                  onPressed: () {
+                    handleStartStop();
+                    if (_stopwatch.isRunning) {
+                      timerVal.stopCount++;
+                    }
+                    print(timerVal.stopCount);
+                  },
                   child: Text(
                     _stopwatch.isRunning ? 'Stop' : 'Start',
                     style: TextStyle(
@@ -77,9 +85,31 @@ class AtimerState extends State<Atimer> {
                     ),
                   )),
             ),
+            SizedBox(
+              height: 50.0,
+            ),
+            stopCountMention
           ],
         ),
       ),
     );
+  }
+
+  Text get stopCountMention {
+    if (timerVal.stopCount >= 3) {
+      return Text('${timerVal.stopCount} / 3',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 25.0,
+            fontWeight: FontWeight.bold,
+          ));
+    } else {
+      return Text('${timerVal.stopCount} / 3',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25.0,
+            fontWeight: FontWeight.bold,
+          ));
+    }
   }
 }

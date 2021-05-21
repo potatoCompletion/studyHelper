@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'timer_painter.dart';
+import '../global-variable/global-state.dart';
 
 // 차감식 타이머 위젯 구현
 class Dtimer extends StatefulWidget {
@@ -9,6 +10,7 @@ class Dtimer extends StatefulWidget {
 }
 
 class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
+  var timerVal = new TimerVal();
   AnimationController controller; //애니메이션 컨트롤러 생성
   String get timerString {
     Duration duration = controller.duration * controller.value;
@@ -38,7 +40,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
       body: Padding(
         padding: EdgeInsets.all(8.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Expanded(
               child: Align(
@@ -77,7 +79,6 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                 builder: (BuildContext context, Widget child) {
                                   return Text(
                                     _timerMention,
-                                    //style: themeData.textTheme.bodyText2,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 25.0,
@@ -113,7 +114,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
             ),
             Container(
               margin: EdgeInsets.all(8.0),
-              child: Row(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   FloatingActionButton(
@@ -126,24 +127,25 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                     onPressed: () {
                       if (controller.isAnimating) {
                         controller.stop(canceled: true);
+                        timerVal.stopCount++;
                       } else {
                         controller.reverse(
                             from: controller.value == 0.0
                                 ? 1.0
                                 : controller.value);
                       }
+                      print(timerVal.stopCount);
                       setState(() {
                         _setIcon;
                       });
                     },
-                  )
+                  ),
                 ],
               ),
             ),
             // sizedBox for Aligning
-            SizedBox(
-              height: 120.0,
-            ),
+
+            stopCountMention
           ],
         ),
       ),
@@ -161,6 +163,24 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
     }
   }
 
+  Text get stopCountMention {
+    if (timerVal.stopCount >= 3) {
+      return Text('${timerVal.stopCount} / 3',
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 25.0,
+            fontWeight: FontWeight.bold,
+          ));
+    } else {
+      return Text('${timerVal.stopCount} / 3',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 25.0,
+            fontWeight: FontWeight.bold,
+          ));
+    }
+  }
+
 //차감식 타이머 멘트 설정
   String get _timerMention {
     if (controller.isAnimating) {
@@ -170,3 +190,4 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
     }
   }
 }
+//TODO : 초기화 버튼 만들어

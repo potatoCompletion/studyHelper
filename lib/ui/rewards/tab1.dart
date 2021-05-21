@@ -29,7 +29,6 @@ class _Tab1State extends State<Tab1> {
     );
   }
 }
-
 BoxDecoration gridState(int index) {
   switch (stampDayCount) {
     case 3:

@@ -516,20 +516,21 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                     /// button reaction
                     onPressed: () {
                       var alertStyle = AlertStyle(
+                        backgroundColor: Colors.grey[700],
                         descStyle: TextStyle(
-                          color: Colors.black,
+                          color: Colors.grey[200],
                           fontWeight: FontWeight.bold,
                           fontSize: 17.0,
                         ),
                         titleStyle: TextStyle(
-                          color: Colors.black,
+                          color: Colors.grey[200],
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
                         ),
                         alertBorder: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                           side: BorderSide(
-                            color: Colors.grey,
+                            color: Colors.white,
                           ),
                         ),
                       );
@@ -542,14 +543,18 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                         title: "오늘도, 수고했어",
                         desc: "타이머의 버튼을 눌러 도장을 받으세요",
                         //image: Image.asset("assets\\pushdown.jpg"),
-                        image: Image.asset("assets/pushdown.jpg"),
+                        image: Image.asset("assets/pushdown.PNG",
+                        //height: 170,
+                        //width: 170,
+                        //alignment: Alignment(-1, 0),
+                        ),
                         buttons: [
                           DialogButton(
                             child: Text(
-                              "이해했습니다",
+                              "알겠습니다",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                                color: Colors.grey[200],
                                 fontSize: 18.0,
                               ),
                             ),
@@ -600,7 +605,9 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                                       style: alertStyle,
                                       title: "이대로만 가자!",
                                       desc: "7일 연속 수고했어!",
-                                      image: Image.asset("assets/reward7.png"),
+                                      image: Image.asset("assets/reward7.png",
+                                      //color: Colors.grey[600],
+                                      ),
                                       buttons: [
                                         DialogButton(
                                           child: Text(
@@ -614,7 +621,7 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                                           onPressed: () {
                                             Navigator.pop(context2);
                                           },
-                                          color: Colors.grey[600],
+                                          color: Colors.grey[850],
                                           radius: BorderRadius.circular(10.0),
                                         ),
                                       ],
@@ -636,7 +643,7 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                               setState(() {});
                               return;
                             },
-                            color: Colors.grey[600],
+                            color: Colors.grey[850],
                             radius: BorderRadius.circular(10.0),
                           ),
                         ],
