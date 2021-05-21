@@ -112,6 +112,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                 ),
               ),
             ),
+            stopCountMention,
             Container(
               margin: EdgeInsets.all(8.0),
               child: Column(
@@ -142,10 +143,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                   ),
                 ],
               ),
-            ),
-            // sizedBox for Aligning
-
-            stopCountMention
+            )
           ],
         ),
       ),

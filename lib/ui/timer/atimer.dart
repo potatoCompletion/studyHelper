@@ -41,6 +41,7 @@ class AtimerState extends State<Atimer> {
   void handleStartStop() {
     if (_stopwatch.isRunning) {
       _stopwatch.stop();
+      timerVal.stopCount++;
     } else {
       _stopwatch.start();
     }
@@ -62,6 +63,10 @@ class AtimerState extends State<Atimer> {
             SizedBox(
               height: 50.0,
             ),
+            stopCountMention,
+            SizedBox(
+              height: 50.0,
+            ),
             // Icon Box design
             SizedBox(
               // Icon Box attributes
@@ -71,11 +76,7 @@ class AtimerState extends State<Atimer> {
               child: ElevatedButton(
                   onPressed: () {
                     handleStartStop();
-                    if (_stopwatch.isRunning) {
-                      timerVal.stopCount++;
-                    }
-                    print(timerVal.stopCount);
-                  },
+                   },
                   child: Text(
                     _stopwatch.isRunning ? 'Stop' : 'Start',
                     style: TextStyle(
@@ -85,10 +86,6 @@ class AtimerState extends State<Atimer> {
                     ),
                   )),
             ),
-            SizedBox(
-              height: 50.0,
-            ),
-            stopCountMention
           ],
         ),
       ),
