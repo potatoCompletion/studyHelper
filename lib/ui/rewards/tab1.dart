@@ -8,8 +8,6 @@ class Tab1 extends StatefulWidget {
 
 class _Tab1State extends State<Tab1> {
   List<int> zero = [0];
-  List<int> rewardMap=
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +27,7 @@ class _Tab1State extends State<Tab1> {
     );
   }
 }
+
 BoxDecoration gridState(int index) {
   switch (stampDayCount) {
     case 3:
