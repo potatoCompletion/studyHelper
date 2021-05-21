@@ -17,6 +17,7 @@ void main() => runApp(MaterialApp(
       routes: {
         'signup': (context) => SignUp(),
         'profile': (context) => Profile(),
+        'setting': (context) => Setting()
       },
     ));
 
