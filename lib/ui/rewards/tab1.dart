@@ -7,7 +7,7 @@ class Tab1 extends StatefulWidget {
 }
 
 class _Tab1State extends State<Tab1> {
-  List<int> zero = [0];
+  //List<int> zero = [0];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,31 +29,56 @@ class _Tab1State extends State<Tab1> {
 }
 
 BoxDecoration gridState(int index) {
-  switch (stampDayCount) {
-    case 3:
-      {
-        if (stampDayCount == index) {
-          return BoxDecoration(
-            color: Colors.grey[600],
-            shape: BoxShape.rectangle,
-            image: DecorationImage(
-              image: AssetImage("assets/reward7.png"),
-            ),
-          );
-        }
-        //specificGirdStyle(0);
-      }
-      break;
-
-    default:
-      {
-        return BoxDecoration(
-          color: Colors.grey[600],
-          shape: BoxShape.rectangle,
-        );
-      }
-      break;
+  // while(true)
+  // {
+  //   if(rewardMap[stampDayCount])
+  // }
+  var checkIndex = 0;
+  if (rewardCheck[stampDayCount] == 0) {
+    rewardCheck[stampDayCount] = 1;
   }
+
+  while (true) {
+    if (rewardCheck[checkIndex++] == 1 || stampDayCount == index) {
+      return BoxDecoration(
+        color: Colors.grey[600],
+        shape: BoxShape.rectangle,
+        image: DecorationImage(
+          image: AssetImage("assets/reward7.png"),
+        ),
+      );
+    } else {
+      return BoxDecoration(
+        color: Colors.grey[600],
+        shape: BoxShape.rectangle,
+      );
+    }
+  }
+  // switch (stampDayCount) {
+  //   case 3:
+  //     {
+  //       if (stampDayCount == index) {
+  //         return BoxDecoration(
+  //           color: Colors.grey[600],
+  //           shape: BoxShape.rectangle,
+  //           image: DecorationImage(
+  //             image: AssetImage("assets/reward7.png"),
+  //           ),
+  //         );
+  //       }
+  //       //specificGirdStyle(0);
+  //     }
+  //     break;
+
+  //   default:
+  //     {
+  //       return BoxDecoration(
+  //         color: Colors.grey[600],
+  //         shape: BoxShape.rectangle,
+  //       );
+  //     }
+  //     break;
+  // }
 }
 
 BoxDecoration specificGirdStyle(int index) {
