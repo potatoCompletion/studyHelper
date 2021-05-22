@@ -27,6 +27,10 @@
 class TimerVal {
   int stopCount = 0;
   String labTime;
+
+  void addStopCount() {
+    stopCount++;
+  }
 }
 
 //////////////////////////////////////////////////////////
