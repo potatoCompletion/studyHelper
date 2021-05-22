@@ -1,6 +1,7 @@
 // Package List
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter/services.dart';
 
 // Sub Page List
 import './ui/calendar/calendar.dart';
@@ -10,7 +11,12 @@ import './ui/home.dart';
 import './ui/user/signup.dart';
 import './ui/user/profile.dart';
 
-void main() => runApp(MaterialApp(
+void main() {
+  // mobile device system Navigator Bar which is in bellow, -> color theme: dark mode
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: Colors.grey[900],
+  ));
+  runApp(MaterialApp(
       home: MyTabs(),
       debugShowCheckedModeBanner: false,
       // move to other pages
@@ -20,6 +26,7 @@ void main() => runApp(MaterialApp(
         'setting': (context) => Setting()
       },
     ));
+}
 
 // TabController 객체를 멤버로 만들어서 상태를 유지하기 때문에 StatefulWidget 클래스 사용
 class MyTabs extends StatefulWidget {
@@ -57,6 +64,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
     return Scaffold(
       // Scaffold element - appBar
       appBar: AppBar(
+        brightness: Brightness.dark,
         title: Text(
           'Touch Down Timer',
           style: TextStyle(
