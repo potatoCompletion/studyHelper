@@ -121,11 +121,9 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                     width: 300,
                     child: Center(
                         child: CustomPaint(
-                          size: Size(300, 200),
-                          painter: LinePainter(),
-                        )
-                    )
-                ),
+                      size: Size(300, 200),
+                      painter: LinePainter(),
+                    ))),
                 stopCountMention,
                 Container(
                   margin: EdgeInsets.all(8.0),
@@ -149,7 +147,6 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                     ? 1.0
                                     : controller.value);
                           }
-                          print(timerVal.stopCount);
                           setState(() {
                             _setIcon;
                           });
