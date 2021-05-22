@@ -17,6 +17,7 @@ class _Tab1State extends State<Tab1> {
             gridDelegate:
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
             itemBuilder: (context, index) => Container(
+                  // rewardMention(index),
                   decoration: gridState(index),
                   margin: EdgeInsets.all(1.0),
                   child: Icon(Icons.access_alarm,
@@ -26,6 +27,22 @@ class _Tab1State extends State<Tab1> {
     );
   }
 }
+
+// Text textState(int index) {
+//   if (rewardCheck[index] == 1) {
+//     return Text(rewardMap[index], style: TextStyle(color: Colors.white));
+//   }
+// }
+
+// Text get rewardMention(index){
+//   if (rewardCheck[index]==1)
+//   {
+//     return Text('{rewardMap[index]}',
+//     style: TextStyle(color: Colors.white,
+//     fontSize: 25.0,
+//     fontWeight: FontWeight.bold),)
+//   }
+// }
 
 BoxDecoration gridState(int index) {
   if (rewardCheck[rewardMap[test]] == 0) rewardCheck[rewardMap[test]] = 1;

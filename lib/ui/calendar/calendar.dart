@@ -543,10 +543,11 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                         title: "오늘도, 수고했어",
                         desc: "타이머의 버튼을 눌러 도장을 받으세요",
                         //image: Image.asset("assets\\pushdown.jpg"),
-                        image: Image.asset("assets/pushdown.PNG",
-                        //height: 170,
-                        //width: 170,
-                        //alignment: Alignment(-1, 0),
+                        image: Image.asset(
+                          "assets/pushdown.PNG",
+                          //height: 170,
+                          //width: 170,
+                          //alignment: Alignment(-1, 0),
                         ),
                         buttons: [
                           DialogButton(
@@ -605,8 +606,9 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                                       style: alertStyle,
                                       title: "이대로만 가자!",
                                       desc: "7일 연속 수고했어!",
-                                      image: Image.asset("assets/reward7.png",
-                                      //color: Colors.grey[600],
+                                      image: Image.asset(
+                                        "assets/reward7.png",
+                                        //color: Colors.grey[600],
                                       ),
                                       buttons: [
                                         DialogButton(
