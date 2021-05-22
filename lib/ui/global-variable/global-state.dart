@@ -52,11 +52,12 @@ Map<DateTime, List<Event>> selectedEvents = {};
 var stampDayCount = 0;
 var _itemCount = 50;
 
+var test = '작심삼일이 뭔데???';
+var test1 = '7일 연속 수고했어!';
+
 var rewardCheck = List<int>.filled(_itemCount, 0);
 
-Map rewardMap = {
-  3: ['작심삼일이 뭔데???', 0]
-};
+Map rewardMap = {'작심삼일이 뭔데???': 3, '7일 연속 수고했어!': 0};
 
 //////////////////////////////////////////////////////////
 /// Reward
