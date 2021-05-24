@@ -11,8 +11,9 @@ class Dtimer extends StatefulWidget {
 }
 
 class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
-  var timerVal = new TimerVal();
+  var timerVal = new TimerVal(); //타이머 클래스 객체 생성
   AnimationController controller; //애니메이션 컨트롤러 생성
+
   String get timerString {
     Duration duration = controller.duration * controller.value;
     return '${(duration.inHours).toString().padLeft(2, '0')}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
@@ -21,9 +22,10 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    timerVal.dCounterTime = 3;
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3), //차감식 타이머 시간 설정
+      duration: Duration(seconds: timerVal.dCounterTime), //차감식 타이머 시간 설정
     );
   }
 

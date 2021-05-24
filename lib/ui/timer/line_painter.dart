@@ -4,8 +4,8 @@ class LinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = Colors.tealAccent
-      ..strokeWidth = 7;
+      ..color = Colors.white
+      ..strokeWidth = 3;
 
     Offset start = Offset(0, size.height / 100);
     Offset end = Offset(size.width, size.height / 100);

@@ -60,6 +60,45 @@ class AtimerState extends State<Atimer> {
     });
   }
 
+  Text get stopCountMention {
+    return Text('${timerVal.stopCount} / 3',
+        style: TextStyle(
+          color: timerVal.stopCount >= 3 ? Colors.red : Colors.white,
+          fontSize: 40.0,
+          fontWeight: FontWeight.bold,
+        ));
+  }
+
+  void _recordLapTime(String time) {
+    _lapTimes.insert(0, _lapText);
+  }
+
+  String get _lapTimeState {
+    if (_stopwatch.isRunning) {
+      if (_lapTimes.isEmpty) {
+        return 'start';
+      } else {
+        return 'restart';
+      }
+    } else {
+      return 'stop';
+    }
+  }
+
+  TextSpan get _lapText {
+    return TextSpan(
+      text: _lapTimeState,
+      style: TextStyle(
+          fontSize: 30,
+          color: _lapTimeState == 'stop' ? Colors.red : Colors.green),
+      children: <TextSpan>[
+        TextSpan(
+            text: '   ${formatTime(_stopwatch.elapsedMilliseconds)}',
+            style: TextStyle(color: Colors.white)),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,9 +129,7 @@ class AtimerState extends State<Atimer> {
                     width: 300,
                     height: 200,
                     child: ListView(
-                      children: _lapTimes
-                          .map((time) => Center(child: RichText(text: time)))
-                          .toList(),
+                      children: _lapTimes.map((time) => Center(child: RichText(text: time))).toList(),
                     ),
                   ),
                   // making distance between Text and Button
@@ -142,44 +179,4 @@ class AtimerState extends State<Atimer> {
           ])),
     );
   }
-
-  Text get stopCountMention {
-    return Text('${timerVal.stopCount} / 3',
-        style: TextStyle(
-          color: timerVal.stopCount >= 3 ? Colors.red : Colors.white,
-          fontSize: 40.0,
-          fontWeight: FontWeight.bold,
-        ));
-  }
-
-  void _recordLapTime(String time) {
-    _lapTimes.insert(0, _lapText);
-  }
-
-  String get _lapTimeState {
-    if (_stopwatch.isRunning) {
-      if (_lapTimes.isEmpty) {
-        return 'start';
-      } else {
-        return 'restart';
-      }
-    } else {
-      return 'stop';
-    }
-  }
-
-  TextSpan get _lapText {
-    return TextSpan(
-      text: _lapTimeState,
-      style: TextStyle(
-          fontSize: 30,
-          color: _lapTimeState == 'stop' ? Colors.red : Colors.green),
-      children: <TextSpan>[
-        TextSpan(
-            text: '   ${formatTime(_stopwatch.elapsedMilliseconds)}',
-            style: TextStyle(color: Colors.white)),
-      ],
-    );
-  }
 }
-//완

@@ -25,8 +25,8 @@
 //
 //
 class TimerVal {
-  int stopCount = 0;
-  String labTime;
+  var stopCount = 0;
+  int dCounterTime;
 
   void addStopCount() {
     stopCount++;
