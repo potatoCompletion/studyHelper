@@ -11,8 +11,9 @@ class Dtimer extends StatefulWidget {
 }
 
 class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
-  var timerVal = new TimerVal();
+  var timerVal = new TimerVal(); //타이머 클래스 객체 생성
   AnimationController controller; //애니메이션 컨트롤러 생성
+
   String get timerString {
     Duration duration = controller.duration * controller.value;
     return '${(duration.inHours).toString().padLeft(2, '0')}:${(duration.inMinutes % 60).toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
@@ -21,9 +22,10 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    timerVal.dCounterTime = 3;
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3), //차감식 타이머 시간 설정
+      duration: Duration(seconds: timerVal.dCounterTime), //차감식 타이머 시간 설정
     );
   }
 
@@ -31,6 +33,42 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  //(디자인) 차감식 타이머 스타트 버튼 모양 설정
+  Icon get _setIcon {
+    if (controller.isAnimating) {
+      return Icon(Icons.pause);
+    } else {
+      return Icon(Icons.play_arrow);
+    }
+  }
+
+  //(디자인) 일시정지 카운트 텍스트
+  Text get stopCountMention {
+    return Text('${timerVal.stopCount} / 3',
+        style: TextStyle(
+          color: timerVal.stopCount >= 3 ? Colors.red : Colors.white,
+          fontSize: 40.0,
+          fontWeight: FontWeight.bold,
+        ));
+  }
+
+//차감식 타이머 멘트 설정
+  String get _timerMention {
+    if (controller.isAnimating) {
+      return '열공중입니다!!';
+    } else {
+      return '준비중입니다..';
+    }
+  }
+
+  //초기화 버튼 동작 구현
+  void _reset() {
+    setState(() {
+      controller.reset();
+      timerVal.stopCount = 0;
+    });
   }
 
   // 차감식 타이머 구현 위젯
@@ -62,9 +100,11 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                 return CustomPaint(
                                     painter: TimerPainter(
                                         animation: controller,
+                                        //(디자인) 차감식 타이머 원형 색상////
                                         backgroundColor:
                                             Color.fromRGBO(104, 104, 104, 1.0),
                                         color: Color.fromRGBO(143, 7, 7, 1.0)));
+                                ////////////////////////////////////
                               },
                             ),
                           ),
@@ -79,6 +119,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                 AnimatedBuilder(
                                     animation: controller,
                                     builder:
+                                        //(디자인) 차감식 타이머 안에 멘트 (열공중, 준비중) 관련//////////////
                                         (BuildContext context, Widget child) {
                                       return Text(
                                         _timerMention,
@@ -88,6 +129,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       );
+                                      ///////////////////////////////////////////////////////////////////////
                                     }),
                                 // Sized Box for Aligning between two AnimatedBuilders
                                 SizedBox(
@@ -98,6 +140,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                     animation: controller,
                                     builder:
                                         (BuildContext context, Widget child) {
+                                      //(디자인) 타이머 시간 문자열 관련 //////////////////
                                       return Text(
                                         timerString,
                                         //style: themeData.textTheme.headline4,
@@ -107,6 +150,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                           fontWeight: FontWeight.bold,
                                         ),
                                       );
+                                      ///////////////////////////////////////////////////
                                     }),
                               ],
                             ),
@@ -157,6 +201,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                 )
               ],
             ),
+            //(디자인) 초기화 버튼 관련 /////////////////
             Positioned(
                 left: 0,
                 bottom: 10,
@@ -167,54 +212,12 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                   },
                   child: Icon(Icons.rotate_left),
                 )),
+            ////////////////////////////////////////////
           ],
         ),
       ),
       //backgroundColor: Color.fromRGBO(241, 227, 190, 1.0),
       backgroundColor: Colors.grey[850],
     );
-  }
-
-  //차감식 타이머 버튼 아이콘 상태 판단 후 설정
-  Icon get _setIcon {
-    if (controller.isAnimating) {
-      return Icon(Icons.pause);
-    } else {
-      return Icon(Icons.play_arrow);
-    }
-  }
-
-  Text get stopCountMention {
-    if (timerVal.stopCount >= 3) {
-      return Text('${timerVal.stopCount} / 3',
-          style: TextStyle(
-            color: Colors.red,
-            fontSize: 40.0,
-            fontWeight: FontWeight.bold,
-          ));
-    } else {
-      return Text('${timerVal.stopCount} / 3',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 40.0,
-            fontWeight: FontWeight.bold,
-          ));
-    }
-  }
-
-//차감식 타이머 멘트 설정
-  String get _timerMention {
-    if (controller.isAnimating) {
-      return '열공중입니다!!';
-    } else {
-      return '준비중입니다..';
-    }
-  }
-
-  void _reset() {
-    setState(() {
-      controller.reset();
-      timerVal.stopCount = 0;
-    });
   }
 }
