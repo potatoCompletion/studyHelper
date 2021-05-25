@@ -13,7 +13,7 @@ class _Tab1State extends State<Tab1> {
         backgroundColor: Colors.grey[850],
         body: Container(
           child: GridView.builder(
-              itemCount: 2,
+              itemCount: axisCount,
               gridDelegate:
                   SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
               itemBuilder: (context, index) => Container(
@@ -33,7 +33,14 @@ class _Tab1State extends State<Tab1> {
 }
 
 Text _textState(int index) {
-  return Text(rewardMap.keys.toList()[index]);
+  return Text(
+    rewardMap.keys.toList()[index],
+    style: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+      fontSize: 18.0,
+    ),
+  );
 }
 
 BoxDecoration gridState(int index) {
