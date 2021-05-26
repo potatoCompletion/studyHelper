@@ -46,7 +46,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
 
   //(디자인) 일시정지 카운트 텍스트
   Text get stopCountMention {
-    return Text('${timerVal.stopCount} / 3',
+    return Text('Stop : ${timerVal.stopCount} / 3',
         style: TextStyle(
           color: timerVal.stopCount >= 3 ? Colors.red : Colors.white,
           fontSize: 40.0,
@@ -160,6 +160,15 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                     ),
                   ),
                 ),
+                // align between line and stop count
+                SizedBox(
+                  height: 35,
+                ),
+                stopCountMention,
+                // align between line and stop count
+                SizedBox(
+                  height: 35,
+                ),  
                 Container(
                     height: 10,
                     width: 300,
@@ -168,11 +177,11 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                       size: Size(300, 200),
                       painter: LinePainter(),
                     ))),
-                // align between line and stop count
+  
+                // align between line and buttons
                 SizedBox(
-                  height: 60,
+                  height: 25,
                 ),
-                stopCountMention,
                 Container(
                   // start button position
                   margin: EdgeInsets.fromLTRB(90.0, 8.0, 2.0, 8.0),
