@@ -34,15 +34,6 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  //(디자인) 차감식 타이머 스타트 버튼 모양 설정
-  Icon get _setIcon {
-    if (controller.isAnimating) {
-      return Icon(Icons.pause);
-    } else {
-      return Icon(Icons.play_arrow);
-    }
-  }
-
   //(디자인) 일시정지 카운트 텍스트
   Text get stopCountMention {
     return Text('Stop : ${timerVal.stopCount} / 3',
@@ -183,34 +174,31 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                 ),
                 Container(
                   // start button position
-                  margin: EdgeInsets.fromLTRB(100.0, 8.0, 2.0, 8.0),
+                  margin: EdgeInsets.fromLTRB(2.0, 8.0, 2.0, 8.0),
                   child: Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       FloatingActionButton(
-
                         backgroundColor: Colors.grey,
                         onPressed: () {
-
                           _reset();
-                        },  
+                        },
                         child: Icon(Icons.rotate_left),
                       ),
-
                       SizedBox(
                         height: 0,
                         width: 40,
                       ),
-
                       // start button 
                       FloatingActionButton(
                         backgroundColor: Colors.blue[800],
-                        child: AnimatedBuilder(
-                          animation: controller,
-                          builder: (BuildContext context, Widget child) {
-                            return _setIcon;
-                          },
-                        ),
+                        // child: AnimatedBuilder(
+                        //   animation: controller,
+                        //   builder: (BuildContext context, Widget child) {
+                        //     return _setIcon;
+                        //   },
+                        // ),
+                        child: Icon(controller.isAnimating ? Icons.pause : Icons.play_arrow),
                         onPressed: () {
                           if (controller.isAnimating) {
                             controller.stop(canceled: true);
@@ -222,9 +210,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                                     ? 1.0
                                     : controller.value);
                           }
-                          setState(() {
-                            _setIcon;
-                          });
+                          setState(() {});
                         },
                       ),
 

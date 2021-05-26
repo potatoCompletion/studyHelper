@@ -11,7 +11,6 @@ class Atimer extends StatefulWidget {
 }
 
 class AtimerState extends State<Atimer> with TickerProviderStateMixin {
-  AnimationController controller; //애니메이션 컨트롤러 생성
   Stopwatch _stopwatch;
   Timer _timer;
 
@@ -59,7 +58,6 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    controller = null;
     super.initState();
     _stopwatch = Stopwatch();
     // re-render every 30ms
@@ -72,15 +70,6 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
   void dispose() {
     _timer.cancel();
     super.dispose();
-  }
-
-  //(디자인) 차감식 타이머 스타트 버튼 모양 설정
-  Icon get _setIcon {
-    if (_stopwatch.isRunning) {
-      return Icon(Icons.pause);
-    } else {
-      return Icon(Icons.play_arrow);
-    }
   }
 
   // 스타트, 스탑 버튼 동작 구현
@@ -116,12 +105,11 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
       body: Padding(
           padding: EdgeInsets.all(8.0),
           child: Stack(children: <Widget>[
-            
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.start, 
+                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     SizedBox(
                       height: 50,
@@ -153,7 +141,7 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
                   ),
                   // making distance between Text and Button
                   SizedBox(
-                    height: 58.0,
+                    height: 41.0,
                   ),
                   // Icon Box design
                   Container(
@@ -161,42 +149,29 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
                     child: Row(
                     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-
                       FloatingActionButton(
-
                         backgroundColor: Colors.grey,
                         onPressed: () {
-
                           _reset();
-                        },  
+                        },
                         child: Icon(Icons.rotate_left),
                       ),
-
                       SizedBox(
                         height: 0,
                         width: 40,
                       ),
-
-                      // start button 
+                      // start button
                       FloatingActionButton(
                         backgroundColor: Colors.blue[800],
-                        child: AnimatedBuilder(
-                          animation: controller,
-                          builder: (BuildContext context, Widget child) {
-                            return _setIcon;
-                          },
-                        ),
+                        child: Icon(_stopwatch.isRunning ? Icons.pause : Icons.play_arrow),
                         onPressed: () {
                           handleStartStop();
                           setState(() {
-                            _setIcon;
                             _recordLapTime(
                                 formatTime(_stopwatch.elapsedMilliseconds));
                           });
-
                         },
                       ),
-                      
                     ],
                   ),
                   ),
