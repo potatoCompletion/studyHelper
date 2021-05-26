@@ -32,11 +32,12 @@ class AtimerState extends State<Atimer> {
     if (_stopwatch.isRunning) {
       if (_lapTimes.isEmpty) {
         return 'start';
-      } else {
-        return 'restart';
+      } 
+      else {
+        return 'start';
       }
     } else {
-      return 'stop';
+      return 'stop ';
     }
   }
 
@@ -46,7 +47,7 @@ class AtimerState extends State<Atimer> {
       text: _lapTimeState,
       style: TextStyle(
           fontSize: 30,
-          color: _lapTimeState == 'stop' ? Colors.red : Colors.green),
+          color: _lapTimeState == 'stop ' ? Colors.red[900] : Colors.green[800]),
       children: <TextSpan>[
         TextSpan(
             text: '   ${formatTime(_stopwatch.elapsedMilliseconds)}',
@@ -114,11 +115,16 @@ class AtimerState extends State<Atimer> {
       body: Padding(
           padding: EdgeInsets.all(8.0),
           child: Stack(children: <Widget>[
+            
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Column(mainAxisAlignment: MainAxisAlignment.start, children: <
-                    Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start, 
+                  children: <Widget>[
+                    SizedBox(
+                      height: 50,
+                    ),
                       //(디자인) 타이머 시간 문자열/////////////////////////////
                   Text(formatTime(_stopwatch.elapsedMilliseconds),
                       style: TextStyle(color: Colors.white, fontSize: 60.0)),
@@ -148,12 +154,14 @@ class AtimerState extends State<Atimer> {
                   SizedBox(
                     height: 30.0,
                   ),
-                  stopCountMention,  // 0 / 3 <----- 일시정지 카운트 텍스트
+                  //stopCountMention,  // 0 / 3 <----- 일시정지 카운트 텍스트
                   SizedBox(
                     height: 30.0,
                   ),
                   // Icon Box design
-                  SizedBox(
+                  Container(
+                    margin: EdgeInsets.fromLTRB(90.0, 8.0, 2.0, 8.0),
+                    child: SizedBox(
                     // Icon Box attributes
                     height: 40.0,
                     width: 90.0,
@@ -177,15 +185,16 @@ class AtimerState extends State<Atimer> {
                         )),
                     ////////////////////////////////////////////////////////////
                   ),
+                  ),
                 ])
               ],
             ),
             // (디자인) 초기화 버튼 /////////////////////////////////////////////
             Positioned(
-                left: 0,
-                bottom: 10,
+                left: 100,
+                bottom: 140,
                 child: FloatingActionButton(
-                  backgroundColor: Colors.deepOrange,
+                  backgroundColor: Colors.grey,
                   onPressed: () {
                     _reset();
                   },
