@@ -9,26 +9,25 @@ class Tab1 extends StatefulWidget {
 class _Tab1State extends State<Tab1> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.grey[850],
-        body: Container(
-          child: GridView.builder(
-              itemCount: axisCount,
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-              itemBuilder: (context, index) => Container(
-                  decoration: gridState(index),
-                  margin: EdgeInsets.all(1.0),
-                  child: Stack(children: <Widget>[
-                    Center(
-                        child: Icon(Icons.access_alarm,
-                            size: 40.0, color: Colors.white30)),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: _textState(index),
-                    )
-                  ]))),
-        ));
+    return Container(
+      child: GridView.builder(
+          // shrinkWrap: true
+          itemCount: axisCount,
+          gridDelegate:
+              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          itemBuilder: (context, index) => Container(
+              margin: EdgeInsets.all(1.0),
+              decoration: gridState(index),
+              child: Stack(children: <Widget>[
+                Center(
+                    child: Icon(Icons.access_alarm,
+                        size: 40.0, color: Colors.white30)),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: _textState(index),
+                )
+              ]))),
+    );
   }
 }
 

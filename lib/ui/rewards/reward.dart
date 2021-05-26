@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_basic/main.dart';
 import 'package:scratcher/scratcher.dart';
 import './tab1.dart';
+import 'tab2.dart';
 
 class Reward extends StatefulWidget {
   @override
@@ -35,7 +36,7 @@ class _Reward extends State<Reward> with SingleTickerProviderStateMixin {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-          length: 1,
+          length: 2,
           child: Scaffold(
               backgroundColor: Colors.grey[850],
               appBar: AppBar(
@@ -49,17 +50,22 @@ class _Reward extends State<Reward> with SingleTickerProviderStateMixin {
                     ),
                   ),
                   bottom: TabBar(
-                    controller: controller,
+                    //controller: controller,
                     tabs: [
                       Tab(
-                        icon: Icon(Icons.av_timer),
-                        text: 'Timer',
+                        //icon: Icon(Icons.lock),
+                        text: 'Grid',
+                      ),
+                      Tab(
+                        // icon: Icon(Icons.av_timer),
+                        text: 'List',
                       ),
                     ],
                     isScrollable: true,
                   )),
-              body: TabBarView(controller: controller, children: [
+              body: TabBarView(children: [
                 Tab1(),
+                Tab2(),
               ]))),
     );
   }
