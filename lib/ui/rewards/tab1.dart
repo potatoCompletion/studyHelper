@@ -38,7 +38,7 @@ Text _textState(int index) {
       rewardMap.keys.toList()[index],
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        color: Colors.white,
+        color: Colors.grey[400],
         fontSize: 20.0,
       ),
     );
