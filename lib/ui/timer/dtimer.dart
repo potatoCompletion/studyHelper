@@ -22,10 +22,9 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    timerVal.dCounterTime = 3;
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: timerVal.dCounterTime), //차감식 타이머 시간 설정
+      duration: timerVal.dTimerTime, //차감식 타이머 시간 설정
     );
   }
 
@@ -33,15 +32,6 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
   void dispose() {
     controller.dispose();
     super.dispose();
-  }
-
-  //(디자인) 차감식 타이머 스타트 버튼 모양 설정
-  Icon get _setIcon {
-    if (controller.isAnimating) {
-      return Icon(Icons.pause);
-    } else {
-      return Icon(Icons.play_arrow);
-    }
   }
 
   //(디자인) 일시정지 카운트 텍스트
@@ -184,38 +174,46 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                 ),
                 Container(
                   // start button position
-                  margin: EdgeInsets.fromLTRB(90.0, 8.0, 2.0, 8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  margin: EdgeInsets.fromLTRB(2.0, 8.0, 2.0, 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      // align between stop count and start button
+                      FloatingActionButton(
+                        backgroundColor: Colors.grey,
+                        onPressed: () {
+                          _reset();
+                        },
+                        child: Icon(Icons.rotate_left),
+                      ),
                       SizedBox(
-                        height: 15,
+                        height: 0,
+                        width: 40,
                       ),
                       // start button 
                       FloatingActionButton(
                         backgroundColor: Colors.blue[800],
-                        child: AnimatedBuilder(
-                          animation: controller,
-                          builder: (BuildContext context, Widget child) {
-                            return _setIcon;
-                          },
-                        ),
+                        // child: AnimatedBuilder(
+                        //   animation: controller,
+                        //   builder: (BuildContext context, Widget child) {
+                        //     return _setIcon;
+                        //   },
+                        // ),
+                        child: Icon(controller.isAnimating ? Icons.pause : Icons.play_arrow),
                         onPressed: () {
                           if (controller.isAnimating) {
                             controller.stop(canceled: true);
                             timerVal.addStopCount();
-                          } else {
+                          } 
+                          else {
                             controller.reverse(
                                 from: controller.value == 0.0
                                     ? 1.0
                                     : controller.value);
                           }
-                          setState(() {
-                            _setIcon;
-                          });
+                          setState(() {});
                         },
                       ),
+
                     ],
                   ),
                 ),
@@ -226,16 +224,16 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
               ],
             ),
             //(디자인) 초기화 버튼 관련 /////////////////
-            Positioned(
-                left: 110,
-                bottom: 38,
-                child: FloatingActionButton(
-                  backgroundColor: Colors.grey,
-                  onPressed: () {
-                    _reset();
-                  },
-                  child: Icon(Icons.rotate_left),
-                )),
+            // Positioned(
+            //     left: 110,
+            //     bottom: 38,
+            //     child: FloatingActionButton(
+            //       backgroundColor: Colors.grey,
+            //       onPressed: () {
+            //         _reset();
+            //       },
+            //       child: Icon(Icons.rotate_left),
+            //     )),
             ////////////////////////////////////////////
           ],
         ),
