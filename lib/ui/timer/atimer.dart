@@ -10,7 +10,8 @@ class Atimer extends StatefulWidget {
   AtimerState createState() => AtimerState();
 }
 
-class AtimerState extends State<Atimer> {
+class AtimerState extends State<Atimer> with TickerProviderStateMixin {
+  AnimationController controller; //애니메이션 컨트롤러 생성
   Stopwatch _stopwatch;
   Timer _timer;
 
@@ -58,18 +59,31 @@ class AtimerState extends State<Atimer> {
 
   @override
   void initState() {
+    controller = null;
     super.initState();
     _stopwatch = Stopwatch();
     // re-render every 30ms
     _timer = Timer.periodic(new Duration(milliseconds: 30), (timer) {
       setState(() {});
     });
+    controller = AnimationController(
+      vsync: this,
+    );
   }
 
   @override
   void dispose() {
     _timer.cancel();
     super.dispose();
+  }
+
+  //(디자인) 차감식 타이머 스타트 버튼 모양 설정
+  Icon get _setIcon {
+    if (controller.isAnimating) {
+      return Icon(Icons.pause);
+    } else {
+      return Icon(Icons.play_arrow);
+    }
   }
 
   // 스타트, 스탑 버튼 동작 구현
@@ -90,16 +104,6 @@ class AtimerState extends State<Atimer> {
       timerVal.stopCount = 0;
       _lapTimes.clear();
     });
-  }
-
-  // (디자인) 일시정지 카운트 문자열 설정
-  Text get stopCountMention {
-    return Text('${timerVal.stopCount} / 3',
-        style: TextStyle(
-          color: timerVal.stopCount >= 3 ? Colors.red : Colors.white,
-          fontSize: 40.0,
-          fontWeight: FontWeight.bold,
-        ));
   }
 
   // 랩타임 리스트 추가
@@ -160,34 +164,36 @@ class AtimerState extends State<Atimer> {
                   ),
                   // Icon Box design
                   Container(
-                    margin: EdgeInsets.fromLTRB(90.0, 8.0, 2.0, 8.0),
-                    child: SizedBox(
-                    // Icon Box attributes
-                    height: 40.0,
-                    width: 90.0,
-                    // box child -> Elevated Button
-                    // (디자인) 스타트/일시정지 버튼 /////////////////////////////
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        
-                        primary: Colors.blue[800],
-                      ),
+                    margin: EdgeInsets.fromLTRB(100.0, 8.0, 2.0, 8.0),
+                    child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+     
+                      // start button 
+                      FloatingActionButton(
+                        backgroundColor: Colors.blue[800],
+                        child: AnimatedBuilder(
+                          animation: controller,
+                          builder: (BuildContext context, Widget child) {
+                            return _setIcon;
+                          },
+                        ),
                         onPressed: () {
-                          handleStartStop();
+                          if (controller.isAnimating) {
+                            controller.stop(canceled: true);
+                            timerVal.addStopCount();
+                          } else {
+                            controller.reverse(
+                                from: controller.value == 0.0
+                                    ? 1.0
+                                    : controller.value);
+                          }
                           setState(() {
-                            _recordLapTime(
-                                formatTime(_stopwatch.elapsedMilliseconds));
+                            _setIcon;
                           });
                         },
-                        child: Text(
-                          _stopwatch.isRunning ? 'Stop' : 'Start',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.0,
-                            //fontWeight: FontWeight.bold,
-                          ),
-                        )),
-                    ////////////////////////////////////////////////////////////
+                      ),
+                    ],
                   ),
                   ),
                 ])
@@ -195,8 +201,8 @@ class AtimerState extends State<Atimer> {
             ),
             // (디자인) 초기화 버튼 /////////////////////////////////////////////
             Positioned(
-                left: 100,
-                bottom: 140,
+                left: 120,
+                bottom: 133,
                 child: FloatingActionButton(
                   backgroundColor: Colors.grey,
                   onPressed: () {
