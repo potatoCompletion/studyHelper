@@ -179,17 +179,11 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
                           },
                         ),
                         onPressed: () {
-                          if (controller.isAnimating) {
-                            controller.stop(canceled: true);
-                            timerVal.addStopCount();
-                          } else {
-                            controller.reverse(
-                                from: controller.value == 0.0
-                                    ? 1.0
-                                    : controller.value);
-                          }
+
+                          handleStartStop();
                           setState(() {
-                            _setIcon;
+                            _recordLapTime(
+                                formatTime(_stopwatch.elapsedMilliseconds));
                           });
                         },
                       ),
