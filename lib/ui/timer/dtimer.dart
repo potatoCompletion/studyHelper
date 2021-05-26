@@ -22,10 +22,9 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    timerVal.dCounterTime = 3;
     controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: timerVal.dCounterTime), //차감식 타이머 시간 설정
+      duration: timerVal.dTimerTime, //차감식 타이머 시간 설정
     );
   }
 

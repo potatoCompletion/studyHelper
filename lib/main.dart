@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import './ui/calendar/calendar.dart';
 import './ui/rewards/reward.dart';
 import './ui/setting/setting.dart';
+import './ui/setting/setting_time.dart';
 import './ui/home.dart';
 import './ui/user/signup.dart';
 import './ui/user/profile.dart';
@@ -23,7 +24,7 @@ void main() {
       routes: {
         'signup': (context) => SignUp(),
         'profile': (context) => Profile(),
-        'setting': (context) => Setting()
+        'TimeSetting': (context) => TimeSetting()
       },
     ));
 }
@@ -81,7 +82,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
               icon: Icon(Icons.settings),
               onPressed: () {
                 print("setting icon is clicked");
-                Navigator.pushNamed(context, 'setting');
+                Navigator.pushNamed(context, 'TimeSetting');
               })
         ],
       ),
