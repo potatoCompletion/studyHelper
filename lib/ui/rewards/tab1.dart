@@ -37,7 +37,7 @@ Text _textState(int index) {
     style: TextStyle(
       fontWeight: FontWeight.bold,
       color: Colors.white,
-      fontSize: 18.0,
+      fontSize: 16.0,
     ),
   );
 }
