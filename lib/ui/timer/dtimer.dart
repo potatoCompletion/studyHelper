@@ -161,20 +161,31 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                   ),
                 ),
                 Container(
-                    height: 30,
+                    height: 10,
                     width: 300,
                     child: Center(
                         child: CustomPaint(
                       size: Size(300, 200),
                       painter: LinePainter(),
                     ))),
+                // align between line and stop count
+                SizedBox(
+                  height: 60,
+                ),
                 stopCountMention,
                 Container(
-                  margin: EdgeInsets.all(8.0),
+                  // start button position
+                  margin: EdgeInsets.fromLTRB(90.0, 8.0, 2.0, 8.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
+                      // align between stop count and start button
+                      SizedBox(
+                        height: 15,
+                      ),
+                      // start button 
                       FloatingActionButton(
+                        backgroundColor: Colors.blue[800],
                         child: AnimatedBuilder(
                           animation: controller,
                           builder: (BuildContext context, Widget child) {
@@ -198,15 +209,19 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
-                )
+                ),
+                // align between bottom and start button 
+                SizedBox(
+                  height: 30,
+                ),
               ],
             ),
             //(디자인) 초기화 버튼 관련 /////////////////
             Positioned(
-                left: 0,
-                bottom: 10,
+                left: 110,
+                bottom: 38,
                 child: FloatingActionButton(
-                  backgroundColor: Colors.deepOrange,
+                  backgroundColor: Colors.grey,
                   onPressed: () {
                     _reset();
                   },
