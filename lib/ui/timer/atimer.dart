@@ -164,7 +164,7 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
                   ),
                   // Icon Box design
                   Container(
-                    margin: EdgeInsets.fromLTRB(100.0, 8.0, 2.0, 8.0),
+                    margin: EdgeInsets.fromLTRB(90.0, 8.0, 2.0, 8.0),
                     child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -179,7 +179,6 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
                           },
                         ),
                         onPressed: () {
-
                           handleStartStop();
                           setState(() {
                             _recordLapTime(
@@ -195,7 +194,7 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
             ),
             // (디자인) 초기화 버튼 /////////////////////////////////////////////
             Positioned(
-                left: 120,
+                left: 110,
                 bottom: 133,
                 child: FloatingActionButton(
                   backgroundColor: Colors.grey,
