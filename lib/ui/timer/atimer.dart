@@ -168,6 +168,10 @@ class AtimerState extends State<Atimer> {
                     // box child -> Elevated Button
                     // (디자인) 스타트/일시정지 버튼 /////////////////////////////
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        
+                        primary: Colors.blue[800],
+                      ),
                         onPressed: () {
                           handleStartStop();
                           setState(() {
