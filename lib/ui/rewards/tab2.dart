@@ -15,7 +15,7 @@ class _Tab2State extends State<Tab2> {
         body: Container(
             child: ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: axisCount,
+                itemCount: achievementCount,
                 itemBuilder: (context, index) {
                   return Container(
                       decoration: BoxDecoration(
@@ -29,7 +29,9 @@ class _Tab2State extends State<Tab2> {
 }
 
 Widget _state(int index) {
-  if (rewardCheck[index] == 1)
+  if (achievementCheck[achievementMap[test3]] == 0)
+    achievementCheck[achievementMap[test3]] = 1;
+  if (achievementCheck[index] == 1)
     return Text(
       rewardMap.keys.toList()[index],
       style: TextStyle(

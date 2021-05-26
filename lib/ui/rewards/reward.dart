@@ -54,11 +54,11 @@ class _Reward extends State<Reward> with SingleTickerProviderStateMixin {
                     tabs: [
                       Tab(
                         //icon: Icon(Icons.lock),
-                        text: 'Grid',
+                        text: 'Reward',
                       ),
                       Tab(
                         // icon: Icon(Icons.av_timer),
-                        text: 'List',
+                        text: 'Achievement',
                       ),
                     ],
                     isScrollable: true,

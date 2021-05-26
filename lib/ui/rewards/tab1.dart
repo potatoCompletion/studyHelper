@@ -12,18 +12,19 @@ class _Tab1State extends State<Tab1> {
     return Container(
       child: GridView.builder(
           // shrinkWrap: true
-          itemCount: axisCount,
+          itemCount: rewardCount,
           gridDelegate:
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           itemBuilder: (context, index) => Container(
               margin: EdgeInsets.all(1.0),
-              decoration: gridState(index),
+              decoration: BoxDecoration(
+                color: Colors.grey[900],
+                shape: BoxShape.rectangle,
+              ),
               child: Stack(children: <Widget>[
-                Center(
-                    child: Icon(Icons.access_alarm,
-                        size: 40.0, color: Colors.white30)),
+                gridState(index),
                 Align(
-                  alignment: Alignment.bottomCenter,
+                  alignment: Alignment(xAlignment, yAlignment),
                   child: _textState(index),
                 )
               ]))),
@@ -32,33 +33,29 @@ class _Tab1State extends State<Tab1> {
 }
 
 Text _textState(int index) {
-  return Text(
-    rewardMap.keys.toList()[index],
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      color: Colors.white,
-      fontSize: 16.0,
-    ),
-  );
-}
-
-BoxDecoration gridState(int index) {
-  if (rewardCheck[rewardMap[test]] == 0) rewardCheck[rewardMap[test]] = 1;
-  if (rewardCheck[rewardMap[test1]] == 0) rewardCheck[rewardMap[test1]] = 1;
-  if (rewardCheck[index] == 1) {
-    return BoxDecoration(
-      color: Colors.grey[600],
-      shape: BoxShape.rectangle,
-      image: DecorationImage(
-        image: AssetImage("assets/reward7.png"),
+  if (rewardCheck[index] == 1)
+    return Text(
+      rewardMap.keys.toList()[index],
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.white,
+        fontSize: 20.0,
       ),
     );
-  } else {
-    return BoxDecoration(
-      color: Colors.grey[600],
-      shape: BoxShape.rectangle,
-    );
-  }
+}
+
+Widget gridState(int index) {
+//  if (rewardCheck[rewardMap[test]] == 0) rewardCheck[rewardMap[test]] = 1;
+  if (rewardCheck[rewardMap[test1]] == 0) rewardCheck[rewardMap[test1]] = 1;
+  if (rewardCheck[index] == 1)
+    return Center(child: Image.asset("assets/reward7.png"));
+  else
+    return Center(
+        child: Icon(
+      Icons.lock,
+      color: Colors.orange,
+      size: 50.0,
+    ));
 }
 
 BoxDecoration specificGirdStyle(int index) {
