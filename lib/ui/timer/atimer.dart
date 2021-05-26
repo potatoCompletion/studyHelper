@@ -66,9 +66,6 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
     _timer = Timer.periodic(new Duration(milliseconds: 30), (timer) {
       setState(() {});
     });
-    controller = AnimationController(
-      vsync: this,
-    );
   }
 
   @override
@@ -79,7 +76,7 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
 
   //(디자인) 차감식 타이머 스타트 버튼 모양 설정
   Icon get _setIcon {
-    if (controller.isAnimating) {
+    if (_stopwatch.isRunning) {
       return Icon(Icons.pause);
     } else {
       return Icon(Icons.play_arrow);
@@ -156,19 +153,30 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
                   ),
                   // making distance between Text and Button
                   SizedBox(
-                    height: 30.0,
-                  ),
-                  //stopCountMention,  // 0 / 3 <----- 일시정지 카운트 텍스트
-                  SizedBox(
-                    height: 30.0,
+                    height: 58.0,
                   ),
                   // Icon Box design
                   Container(
-                    margin: EdgeInsets.fromLTRB(90.0, 8.0, 2.0, 8.0),
-                    child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    margin: EdgeInsets.fromLTRB(2.0, 8.0, 2.0, 8.0),
+                    child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-     
+
+                      FloatingActionButton(
+
+                        backgroundColor: Colors.grey,
+                        onPressed: () {
+
+                          _reset();
+                        },  
+                        child: Icon(Icons.rotate_left),
+                      ),
+
+                      SizedBox(
+                        height: 0,
+                        width: 40,
+                      ),
+
                       // start button 
                       FloatingActionButton(
                         backgroundColor: Colors.blue[800],
@@ -181,11 +189,14 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
                         onPressed: () {
                           handleStartStop();
                           setState(() {
+                            _setIcon;
                             _recordLapTime(
                                 formatTime(_stopwatch.elapsedMilliseconds));
                           });
+
                         },
                       ),
+                      
                     ],
                   ),
                   ),
@@ -193,16 +204,16 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
               ],
             ),
             // (디자인) 초기화 버튼 /////////////////////////////////////////////
-            Positioned(
-                left: 110,
-                bottom: 133,
-                child: FloatingActionButton(
-                  backgroundColor: Colors.grey,
-                  onPressed: () {
-                    _reset();
-                  },
-                  child: Icon(Icons.rotate_left),
-                )),
+            // Positioned(
+            //     left: 110,
+            //     bottom: 133,
+            //     child: FloatingActionButton(
+            //       backgroundColor: Colors.grey,
+            //       onPressed: () {
+            //         _reset();
+            //       },
+            //       child: Icon(Icons.rotate_left),
+            //     ),),
             ////////////////////////////////////////////////////////////////////
           ])),
     );

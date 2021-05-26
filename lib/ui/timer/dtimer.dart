@@ -184,14 +184,25 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                 ),
                 Container(
                   // start button position
-                  margin: EdgeInsets.fromLTRB(90.0, 8.0, 2.0, 8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  margin: EdgeInsets.fromLTRB(100.0, 8.0, 2.0, 8.0),
+                  child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      // align between stop count and start button
-                      SizedBox(
-                        height: 15,
+                      FloatingActionButton(
+
+                        backgroundColor: Colors.grey,
+                        onPressed: () {
+
+                          _reset();
+                        },  
+                        child: Icon(Icons.rotate_left),
                       ),
+
+                      SizedBox(
+                        height: 0,
+                        width: 40,
+                      ),
+
                       // start button 
                       FloatingActionButton(
                         backgroundColor: Colors.blue[800],
@@ -205,7 +216,8 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                           if (controller.isAnimating) {
                             controller.stop(canceled: true);
                             timerVal.addStopCount();
-                          } else {
+                          } 
+                          else {
                             controller.reverse(
                                 from: controller.value == 0.0
                                     ? 1.0
@@ -216,6 +228,7 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
                           });
                         },
                       ),
+
                     ],
                   ),
                 ),
@@ -226,16 +239,16 @@ class DtimerState extends State<Dtimer> with TickerProviderStateMixin {
               ],
             ),
             //(디자인) 초기화 버튼 관련 /////////////////
-            Positioned(
-                left: 110,
-                bottom: 38,
-                child: FloatingActionButton(
-                  backgroundColor: Colors.grey,
-                  onPressed: () {
-                    _reset();
-                  },
-                  child: Icon(Icons.rotate_left),
-                )),
+            // Positioned(
+            //     left: 110,
+            //     bottom: 38,
+            //     child: FloatingActionButton(
+            //       backgroundColor: Colors.grey,
+            //       onPressed: () {
+            //         _reset();
+            //       },
+            //       child: Icon(Icons.rotate_left),
+            //     )),
             ////////////////////////////////////////////
           ],
         ),
