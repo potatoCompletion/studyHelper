@@ -2,18 +2,32 @@ import 'package:flutter/material.dart';
 
 import './timer/dtimer.dart';
 import './timer/atimer.dart';
+import './global-variable/global-state.dart';
 
 class Home extends StatefulWidget {
+  var timerVal = new TimerVal();
+
+  Home({@required this.timerVal});
+
   @override
-  _HomeState createState() => _HomeState();
+  HomeState createState() => HomeState();
 }
 
-class _HomeState extends State<Home> {
+class HomeState extends State<Home> {
+  var timerVal = new TimerVal();
+  HomeState({this.timerVal});
+
+  void initState(){
+    setState(() {
+      timerVal = widget.timerVal;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return PageView(children: [
       AutomaticKeepAliveScreen(
-        child: Dtimer(),
+        child: Dtimer(timerVal: timerVal),
       ),
       AutomaticKeepAliveScreen(
         child: Atimer(),
