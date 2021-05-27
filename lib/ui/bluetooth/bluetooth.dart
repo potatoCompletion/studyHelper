@@ -57,7 +57,21 @@ class _BluetoothState extends State<Bluetooth> {
                   'Connect',
                   style: TextStyle(color: Colors.white),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  // setState(() async {
+                  //   widget.flutterBlue.stopScan();
+                  //   try {
+                  //     await device.connect();
+                  //   } catch (e) {
+                  //     if (e.code != 'already_connected') {
+                  //       throw e;
+                  //     }
+                  //   } finally {
+                  //     _services = await device.discoverServices();
+                  //   }
+                  //   _connectedDevice = device;
+                  // });
+                },
               ),
             ],
           ),
@@ -71,6 +85,20 @@ class _BluetoothState extends State<Bluetooth> {
       ],
     );
   }
+
+  // ListView _buildView() {
+  //   if (_connectedDevice != null) {
+  //     return _buildConnectDeviceView();
+  //   }
+  //   return _buildListViewOfDevices();
+  // }
+
+  // ListView _buildConnectDeviceView() {
+  //   return ListView(
+  //     padding: const EdgeInsets.all(8),
+  //     children: <Widget>[],
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
