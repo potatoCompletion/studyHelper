@@ -42,6 +42,8 @@ Text _textState(int index) {
         fontSize: 20.0,
       ),
     );
+  else
+    return Text('');
 }
 
 Widget gridState(int index) {
