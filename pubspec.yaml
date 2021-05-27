@@ -28,6 +28,8 @@ dependencies:
   flutter:
     sdk: flutter
   scratcher: ^1.4.1
+  flutter_blue: 0.6.3+1
+  
   #cloud_firestore: ^0.12.11
 
   # The following adds the Cupertino Icons font to your application.

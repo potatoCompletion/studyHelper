@@ -11,8 +11,12 @@ import './ui/setting/setting_time.dart';
 import './ui/home.dart';
 import './ui/user/signup.dart';
 import './ui/user/profile.dart';
+<<<<<<< HEAD
 import './ui/global-variable/global-state.dart';
 import './ui/timer/dtimer.dart';
+=======
+import './ui/bluetooth/bluetooth.dart';
+>>>>>>> 78adea018c540ab31d43f6528da51f34d37886cc
 
 void main() {
   // mobile device system Navigator Bar which is in bellow, -> color theme: dark mode
@@ -20,15 +24,15 @@ void main() {
     systemNavigationBarColor: Colors.grey[900],
   ));
   runApp(MaterialApp(
-      home: MyTabs(),
-      debugShowCheckedModeBanner: false,
-      // move to other pages
-      routes: {
-        'signup': (context) => SignUp(),
-        'profile': (context) => Profile(),
-        'TimeSetting': (context) => TimeSetting()
-      },
-    ));
+    home: MyTabs(),
+    debugShowCheckedModeBanner: false,
+    // move to other pages
+    routes: {
+      'signup': (context) => SignUp(),
+      'profile': (context) => Profile(),
+      'TimeSetting': (context) => TimeSetting()
+    },
+  ));
 }
 
 // TabController 객체를 멤버로 만들어서 상태를 유지하기 때문에 StatefulWidget 클래스 사용
@@ -52,7 +56,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
     super.initState();
     // SingleTickerProviderStateMixin를 상속 받아서
     // vsync에 this 형태로 전달해야 애니메이션이 정상 처리된다.
-    controller = TabController(vsync: this, length: 3);
+    controller = TabController(vsync: this, length: 4);
   }
 
   // initState 함수의 반대.
@@ -97,7 +101,11 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
       ),
       // Scaffold element -> body
       body: TabBarView(controller: controller, // 컨트롤러 연결
+<<<<<<< HEAD
           children: [Home(timerVal: timerVal), Calendar(), Reward()]),
+=======
+          children: [Home(), Calendar(), Reward(), Bluetooth()]),
+>>>>>>> 78adea018c540ab31d43f6528da51f34d37886cc
       bottomNavigationBar: Container(
         child: TabBar(controller: controller, // 컨트롤러 연결
             tabs: [
@@ -105,7 +113,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
               Tab(icon: Icon(Icons.av_timer), text: 'Timer'),
               Tab(icon: Icon(Icons.calendar_today), text: 'Calendar'),
               Tab(icon: Icon(Icons.card_giftcard), text: 'Reward'),
-              //Tab(icon: Icon(Icons.settings_rounded), text: 'Setting'),
+              Tab(icon: Icon(Icons.settings_rounded), text: 'Bluetooth'),
             ]),
         color: Color.fromRGBO(58, 55, 55, 1.0), // 탭바 색상 설정
       ),
