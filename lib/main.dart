@@ -53,7 +53,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
     super.initState();
     // SingleTickerProviderStateMixin를 상속 받아서
     // vsync에 this 형태로 전달해야 애니메이션이 정상 처리된다.
-    controller = TabController(vsync: this, length: 3);
+    controller = TabController(vsync: this, length: 4);
   }
 
   // initState 함수의 반대.
@@ -84,25 +84,24 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.settings),
-              onPressed: () async{
+              onPressed: () async {
                 print("setting icon is clicked");
-                timerVal.dTimerTime = await Navigator.push(context, MaterialPageRoute(builder: (context) => TimeSetting()));
+                timerVal.dTimerTime = await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TimeSetting()));
                 if (timerVal.dTimerTime == null) {
                   timerVal.dTimerTime = prevTimerVal.dTimerTime;
-                }
-                else {
+                } else {
                   prevTimerVal.dTimerTime = timerVal.dTimerTime;
                 }
 
                 print(timerVal.dTimerTime);
               })
-
         ],
       ),
       // Scaffold element -> body
       body: TabBarView(controller: controller, // 컨트롤러 연결
           children: [Home(timerVal: timerVal), Calendar(), Reward()]),
-          //children: [Home(), Calendar(), Reward(), Bluetooth()],
+      //children: [Home(), Calendar(), Reward(), Bluetooth()],
       bottomNavigationBar: Container(
         child: TabBar(controller: controller, // 컨트롤러 연결
             tabs: [
@@ -110,7 +109,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
               Tab(icon: Icon(Icons.av_timer), text: 'Timer'),
               Tab(icon: Icon(Icons.calendar_today), text: 'Calendar'),
               Tab(icon: Icon(Icons.card_giftcard), text: 'Reward'),
-              //Tab(icon: Icon(Icons.settings_rounded), text: 'Bluetooth'),
+              Tab(icon: Icon(Icons.settings_rounded), text: 'Bluetooth'),
             ]),
         color: Color.fromRGBO(58, 55, 55, 1.0), // 탭바 색상 설정
       ),
