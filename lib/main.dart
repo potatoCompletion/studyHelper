@@ -84,25 +84,29 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.settings),
-              onPressed: () async{
+              onPressed: () async {
                 print("setting icon is clicked");
-                timerVal.dTimerTime = await Navigator.push(context, MaterialPageRoute(builder: (context) => TimeSetting()));
+                timerVal.dTimerTime = await Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => TimeSetting()));
                 if (timerVal.dTimerTime == null) {
                   timerVal.dTimerTime = prevTimerVal.dTimerTime;
-                }
-                else {
+                } else {
                   prevTimerVal.dTimerTime = timerVal.dTimerTime;
                 }
 
                 print(timerVal.dTimerTime);
               })
-
         ],
       ),
       // Scaffold element -> body
       body: TabBarView(controller: controller, // 컨트롤러 연결
+<<<<<<< HEAD
+          children: [Home(timerVal: timerVal), Calendar(), Reward()]),
+      //children: [Home(), Calendar(), Reward(), Bluetooth()],
+=======
           children: [Home(timerVal: timerVal), Calendar(), Reward(), Bluetooth()]),
           //children: [Home(), Calendar(), Reward(), Bluetooth()],
+>>>>>>> 3ebb94161eaa4344b603fa8ce972bc6ced0fe488
       bottomNavigationBar: Container(
         child: TabBar(controller: controller, // 컨트롤러 연결
             tabs: [
