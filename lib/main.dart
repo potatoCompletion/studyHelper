@@ -7,12 +7,10 @@ import 'package:flutter/services.dart';
 import './ui/calendar/calendar.dart';
 import './ui/rewards/reward.dart';
 import './ui/setting/setting.dart';
-import './ui/setting/setting_time.dart';
 import './ui/home.dart';
 import './ui/user/signup.dart';
 import './ui/user/profile.dart';
 import './ui/global-variable/global-state.dart';
-import './ui/timer/dtimer.dart';
 import './ui/bluetooth/bluetooth.dart';
 
 void main() {
@@ -27,7 +25,7 @@ void main() {
     routes: {
       'signup': (context) => SignUp(),
       'profile': (context) => Profile(),
-      'TimeSetting': (context) => TimeSetting()
+      'setting': (context) => Setting()
     },
   ));
 }
@@ -87,7 +85,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
               onPressed: () async {
                 print("setting icon is clicked");
                 timerVal.dTimerTime = await Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TimeSetting()));
+                    MaterialPageRoute(builder: (context) => Setting()));
                 if (timerVal.dTimerTime == null) {
                   timerVal.dTimerTime = prevTimerVal.dTimerTime;
                 } else {
