@@ -62,12 +62,16 @@ class _BluetoothState extends State<Bluetooth> {
                       color: Colors.white,
                     ),
                     ),
-                    Text(device.id.toString()),
+                    Text(device.id.toString(),
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    ),
                   ],
                 ),
               ),
               FlatButton(
-                color: Colors.blue,
+                color: Colors.blue[800],
                 child: Text(
                   'Connect',
                   style: TextStyle(color: Colors.white),
