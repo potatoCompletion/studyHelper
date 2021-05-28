@@ -100,13 +100,8 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
       ),
       // Scaffold element -> body
       body: TabBarView(controller: controller, // 컨트롤러 연결
-<<<<<<< HEAD
-          children: [Home(timerVal: timerVal), Calendar(), Reward()]),
-      //children: [Home(), Calendar(), Reward(), Bluetooth()],
-=======
           children: [Home(timerVal: timerVal), Calendar(), Reward(), Bluetooth()]),
           //children: [Home(), Calendar(), Reward(), Bluetooth()],
->>>>>>> 3ebb94161eaa4344b603fa8ce972bc6ced0fe488
       bottomNavigationBar: Container(
         child: TabBar(controller: controller, // 컨트롤러 연결
             tabs: [
@@ -278,7 +273,6 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
             ),
           ),
         ),
-      ),
-    );
+      ));
   }
 }
