@@ -26,7 +26,7 @@
 //
 class TimerVal {
   var stopCount = 0;
-  Duration dTimerTime = Duration(hours: 0, minutes: 20, seconds: 0);
+  Duration dTimerTime = Duration(hours: 0, minutes: 0, seconds: 3);
 
   void addStopCount() {
     stopCount++;
