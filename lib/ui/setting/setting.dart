@@ -4,14 +4,27 @@ import 'package:flutter/cupertino.dart';
 import '../global-variable/global-state.dart';
 
 class Setting extends StatefulWidget {
-  @override
-  _SettingState createState() => _SettingState();
-}
-
-class _SettingState extends State<Setting> {
   var timerVal = new TimerVal();
 
+  Setting({@required this.timerVal});
+
+  @override
+  SettingState createState() => SettingState();
+}
+
+class SettingState extends State<Setting> {
+  var timerVal = new TimerVal();
+  Duration changedTime;
+
   var value = "";
+
+  SettingState({this.timerVal});
+
+  void initState(){
+    setState(() {
+      timerVal = widget.timerVal;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +68,7 @@ class _SettingState extends State<Setting> {
                                   initialTimerDuration: timerVal.dTimerTime,
                                   onTimerDurationChanged:
                                       (Duration changedTimer) {
-                                    timerVal.dTimerTime = changedTimer;
+                                    changedTime = changedTimer;
                                   },
                                 ),
                               );
@@ -158,7 +171,9 @@ class _SettingState extends State<Setting> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context, timerVal.dTimerTime);
+                    changedTime == null
+                        ? Navigator.pop(context, timerVal.dTimerTime)
+                        : Navigator.pop(context, changedTime);
                   },
                   child: Text(
                     '저장',
@@ -173,3 +188,5 @@ class _SettingState extends State<Setting> {
     );
   }
 }
+
+//TODO: SETTING 들어갔다가 뒤로가기로 나오면 시간 초기화되는 문제 해결해야함

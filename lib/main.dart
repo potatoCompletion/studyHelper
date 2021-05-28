@@ -85,11 +85,9 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
               onPressed: () async {
                 print("setting icon is clicked");
                 timerVal.dTimerTime = await Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Setting()));
+                    MaterialPageRoute(builder: (context) => Setting(timerVal: timerVal)));
                 if (timerVal.dTimerTime == null) {
                   timerVal.dTimerTime = prevTimerVal.dTimerTime;
-                } else {
-                  prevTimerVal.dTimerTime = timerVal.dTimerTime;
                 }
 
                 print(timerVal.dTimerTime);
