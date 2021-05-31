@@ -88,6 +88,8 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                     MaterialPageRoute(builder: (context) => Setting(timerVal: timerVal)));
                 if (timerVal.dTimerTime == null) {
                   timerVal.dTimerTime = prevTimerVal.dTimerTime;
+                } else {
+                  prevTimerVal.dTimerTime = timerVal.dTimerTime;
                 }
 
                 print(timerVal.dTimerTime);

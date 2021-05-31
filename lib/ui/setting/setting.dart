@@ -188,5 +188,3 @@ class SettingState extends State<Setting> {
     );
   }
 }
-
-//TODO: SETTING 들어갔다가 뒤로가기로 나오면 시간 초기화되는 문제 해결해야함
