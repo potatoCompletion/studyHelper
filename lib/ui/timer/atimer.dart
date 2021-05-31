@@ -109,7 +109,6 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Column(
-                  //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     SizedBox(
                       height: 50,
@@ -178,18 +177,6 @@ class AtimerState extends State<Atimer> with TickerProviderStateMixin {
                 ])
               ],
             ),
-            // (디자인) 초기화 버튼 /////////////////////////////////////////////
-            // Positioned(
-            //     left: 110,
-            //     bottom: 133,
-            //     child: FloatingActionButton(
-            //       backgroundColor: Colors.grey,
-            //       onPressed: () {
-            //         _reset();
-            //       },
-            //       child: Icon(Icons.rotate_left),
-            //     ),),
-            ////////////////////////////////////////////////////////////////////
           ])),
     );
   }

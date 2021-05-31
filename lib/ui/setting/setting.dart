@@ -1,166 +1,187 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-//Setting 위젯 구현
-class Setting extends StatelessWidget {
+import '../global-variable/global-state.dart';
+
+class Setting extends StatefulWidget {
+  var timerVal = new TimerVal();
+
+  Setting({@required this.timerVal});
+
+  @override
+  SettingState createState() => SettingState();
+}
+
+class SettingState extends State<Setting> {
+  var timerVal = new TimerVal();
+  Duration changedTime;
+
+  var value = "";
+
+  SettingState({this.timerVal});
+
+  void initState(){
+    setState(() {
+      timerVal = widget.timerVal;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[850],
-      // Scaffold element - appBar
       appBar: AppBar(
-          backgroundColor: Colors.grey[850],
-          title: Text(
-            'Settings',
-            style: TextStyle(
-              fontSize: 17.0,
-              fontWeight: FontWeight.bold,
-            ),
-          )),
-      body: ListView(
-        padding: const EdgeInsets.all(11),
-        children: <Widget>[
-          // 1st factor - Theme
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '테마',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+        brightness: Brightness.dark,
+        title: Text('timer time setting'),
+        backgroundColor: Colors.grey[850],
+      ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Column(
+            children: [
+              Container(
+                width: 300,
+                height: 400,
+                child: ListView(children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[800],
+                      ),
+                      onPressed: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext builder) {
+                              return Container(
+                                height: MediaQuery.of(context)
+                                    .copyWith()
+                                    .size
+                                    .height /
+                                    3,
+                                child: CupertinoTimerPicker(
+                                  mode: CupertinoTimerPickerMode.hms,
+                                  minuteInterval: 1,
+                                  secondInterval: 1,
+                                  initialTimerDuration: timerVal.dTimerTime,
+                                  onTimerDurationChanged:
+                                      (Duration changedTimer) {
+                                    changedTime = changedTimer;
+                                  },
+                                ),
+                              );
+                            });
+                      },
+                      child: Text('SELECT TIME'),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[800],
+                      ),
+                      onPressed: () {
+                        //     TODO: add function
+                      },
+                      child: Text('BLUETOOTH SETTING'),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[800],
+                      ),
+                      onPressed: () {
+                        //     TODO: add function
+                      },
+                      child: Text('HELP'),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[800],
+                      ),
+                      onPressed: () {
+                        //     TODO: add function
+                      },
+                      child: Text('PROFILE SETTING'),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[800],
+                      ),
+                      onPressed: () {
+                        //     TODO: add function
+                      },
+                      child: Text('CONTACT'),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[800],
+                      ),
+                      onPressed: () {
+                        //     TODO: add function
+                      },
+                      child: Text('UI/UX SETTING'),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.grey[800],
+                      ),
+                      onPressed: () {
+                        //     TODO: add function
+                      },
+                      child: Text('AUTHOR'),
+                    ),
+                  ),
+                ]),
               ),
-            )),
-          ),
-          // 2nd factor - Version Check
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '버전 확인',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+              SizedBox(
+                height: 100,
               ),
-            )),
-          ),
-          // 3rd factor - Profile setup
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '프로필 설정',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+              Container(
+                width: 100,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    changedTime == null
+                        ? Navigator.pop(context, timerVal.dTimerTime)
+                        : Navigator.pop(context, changedTime);
+                  },
+                  child: Text(
+                    '저장',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
               ),
-            )),
-          ),
-          // 4th factor - User/Security
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '개인/보안',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
-          ),
-          // 5th factor - Alarm
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '알림',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
-          ),
-          // 6th factor - Screen
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '화면',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
-          ),
-          // 7th factor - Others
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '기타',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
-          ),
-          // 8th factor - Help
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '도움말',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
-          ),
-          // 9th factor - Information
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '공지사항',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
-          ),
-          // 10th factor - Contects
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '고객센터',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
-          ),
-          // 11th factor - Labotary
-          Container(
-            height: 50,
-            color: Colors.grey[850],
-            child: const Center(
-                child: Text(
-              '실험실',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            )),
+            ],
           ),
         ],
       ),
