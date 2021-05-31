@@ -17,6 +17,7 @@ class _BluetoothState extends State<Bluetooth> {
   final _writeController = TextEditingController();
   BluetoothDevice _connectedDevice;
   List<BluetoothService> _services;
+  //bool _isScanning= false;
 
 
   
@@ -43,7 +44,7 @@ class _BluetoothState extends State<Bluetooth> {
         _addDeviceTolist(result.device);
       }
     });
-    widget.flutterBlue.startScan();
+    widget.flutterBlue.stopScan();
   }
 
   ListView _buildListViewOfDevices() {
@@ -298,9 +299,23 @@ class _BluetoothState extends State<Bluetooth> {
         ),
         backgroundColor: Colors.grey[850],
         elevation: 0.0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.bluetooth_rounded), 
+            onPressed: () async{
+              widget.flutterBlue.startScan(timeout: Duration(seconds: 10));
+              
+              setState(() {
+                widget.devicesList.clear();
+                
+              },);
+            }
+            ),
+        ],
       ),
 
       body: _buildView(),
+      
     );
   }
 }
