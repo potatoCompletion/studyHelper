@@ -66,212 +66,219 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Scaffold element - appBar
-      appBar: AppBar(
-        brightness: Brightness.dark,
-        title: Text(
-          'Touch Down Timer',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20.0,
-            color: Colors.grey[400],
-          ),
-        ),
-        // Color
-        backgroundColor: Colors.grey[850],
-        // AppBar setting Icon
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () async {
-                print("setting icon is clicked");
-                timerVal.dTimerTime = await Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Setting(timerVal: timerVal)));
-                if (timerVal.dTimerTime == null) {
-                  timerVal.dTimerTime = prevTimerVal.dTimerTime;
-                } else {
-                  prevTimerVal.dTimerTime = timerVal.dTimerTime;
-                }
-
-                print(timerVal.dTimerTime);
-              })
-        ],
-      ),
-      // Scaffold element -> body
-      body: TabBarView(controller: controller, // 컨트롤러 연결
-          children: [Home(timerVal: timerVal), Calendar(), Reward(), Bluetooth()]),
-          //children: [Home(), Calendar(), Reward(), Bluetooth()],
-      bottomNavigationBar: Container(
-        child: TabBar(controller: controller, // 컨트롤러 연결
-            tabs: [
-              // 제목에 들어간 색상은 중요.
-              Tab(icon: Icon(Icons.av_timer), text: 'Timer'),
-              Tab(icon: Icon(Icons.calendar_today), text: 'Calendar'),
-              Tab(icon: Icon(Icons.card_giftcard), text: 'Reward'),
-              Tab(icon: Icon(Icons.settings_rounded), text: 'Bluetooth'),
-            ]),
-        color: Color.fromRGBO(58, 55, 55, 1.0), // 탭바 색상 설정
-      ),
-
-      // Scaffold element -> drawer
-      drawer: Container(
-        width: 250,
-        child: Drawer(
-          child: Container(
-            color: Colors.grey[700],
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                UserAccountsDrawerHeader(
-                  currentAccountPicture: CircleAvatar(
-                    // temporary User Image
-                    //backgroundImage: AssetImage("assets\\cat_sample2.png"),
-                    backgroundImage: AssetImage("assets/cat_sample2.png"),
-                    backgroundColor: Colors.grey[400],
-                  ),
-                  otherAccountsPictures: <Widget>[
-                    CircleAvatar(
-                      // temporary User Image -> Ignore
-                      //backgroundImage: AssetImage("assets\\cat-second.png"),
-                      backgroundColor: Colors.grey[850],
-                    ),
-                  ],
-                  //////text - name
-                  accountName: Text(
-                    "사용자:  Loaf Cat",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 11.0,
-                    ),
-                  ),
-                  //////text - email
-                  accountEmail: Text(
-                    "junheeyu.***@Gmail.com",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  decoration: BoxDecoration(
-                      color: Colors.grey[850],
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20.0),
-                        bottomRight: Radius.circular(20.0),
-                      )),
-                ),
-                ///////Drawer Head list
-
-                //////////////////////////////////////////////////////
-                // SignIn icon
-                ListTile(
-                  leading: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    "Sign in",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onTap: () {
-                    print("Sign in is clicked");
-                    Alert(
-                        context: context,
-                        title: "LOGIN",
-                        content: Column(
-                          children: <Widget>[
-                            TextField(
-                              decoration: InputDecoration(
-                                icon: Icon(Icons.account_circle),
-                                labelText: 'Username',
-                              ),
-                            ),
-                            TextField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                icon: Icon(Icons.lock),
-                                labelText: 'Password',
-                              ),
-                            ),
-                          ],
-                        ),
-                        buttons: [
-                          DialogButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text(
-                              "LOGIN",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                          )
-                        ]).show();
-                  },
-                  //trailing: Icon(Icons.add),
-                ),
-
-                //////////////////////////////////////////////////////
-                // SignUp Icon
-                ListTile(
-                  leading: Icon(
-                    Icons.person_add,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    "SignUp",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onTap: () {
-                    print("SignUp is clicked");
-                    Navigator.pushNamed(context, 'signup');
-                  },
-                  //trailing: Icon(Icons.add),
-                ),
-
-                //////////////////////////////////////////////////////
-                // Profile Icon
-                ListTile(
-                  leading: Icon(
-                    Icons.person_pin_rounded,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    "Profile",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onTap: () {
-                    print("Profile is clicked");
-                    Navigator.pushNamed(context, 'profile');
-                  },
-                  //trailing: Icon(Icons.add),
-                ),
-
-                //////////////////////////////////////////////////////
-                // Q&A Icon
-                ListTile(
-                  leading: Icon(
-                    Icons.question_answer,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    "Q&A",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  onTap: () {
-                    print("Q&A is clicked");
-                  },
-                  //trailing: Icon(Icons.add),
-                ),
-              ],
+        // Scaffold element - appBar
+        appBar: AppBar(
+          brightness: Brightness.dark,
+          title: Text(
+            'Touch Down Timer',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20.0,
+              color: Colors.grey[400],
             ),
           ),
+          // Color
+          backgroundColor: Colors.grey[850],
+          // AppBar setting Icon
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () async {
+                  print("setting icon is clicked");
+                  timerVal.dTimerTime = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Setting(timerVal: timerVal)));
+                  if (timerVal.dTimerTime == null) {
+                    timerVal.dTimerTime = prevTimerVal.dTimerTime;
+                  } else {
+                    prevTimerVal.dTimerTime = timerVal.dTimerTime;
+                  }
+
+                  print(timerVal.dTimerTime);
+                })
+          ],
         ),
-      ));
+        // Scaffold element -> body
+        body: TabBarView(controller: controller, // 컨트롤러 연결
+            children: [
+              Home(timerVal: timerVal),
+              Calendar(),
+              Reward(),
+              ArduinoBT()
+            ]),
+        //children: [Home(), Calendar(), Reward(), Bluetooth()],
+        bottomNavigationBar: Container(
+          child: TabBar(controller: controller, // 컨트롤러 연결
+              tabs: [
+                // 제목에 들어간 색상은 중요.
+                Tab(icon: Icon(Icons.av_timer), text: 'Timer'),
+                Tab(icon: Icon(Icons.calendar_today), text: 'Calendar'),
+                Tab(icon: Icon(Icons.card_giftcard), text: 'Reward'),
+                Tab(icon: Icon(Icons.settings_rounded), text: 'Bluetooth'),
+              ]),
+          color: Color.fromRGBO(58, 55, 55, 1.0), // 탭바 색상 설정
+        ),
+
+        // Scaffold element -> drawer
+        drawer: Container(
+          width: 250,
+          child: Drawer(
+            child: Container(
+              color: Colors.grey[700],
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  UserAccountsDrawerHeader(
+                    currentAccountPicture: CircleAvatar(
+                      // temporary User Image
+                      //backgroundImage: AssetImage("assets\\cat_sample2.png"),
+                      backgroundImage: AssetImage("assets/cat_sample2.png"),
+                      backgroundColor: Colors.grey[400],
+                    ),
+                    otherAccountsPictures: <Widget>[
+                      CircleAvatar(
+                        // temporary User Image -> Ignore
+                        //backgroundImage: AssetImage("assets\\cat-second.png"),
+                        backgroundColor: Colors.grey[850],
+                      ),
+                    ],
+                    //////text - name
+                    accountName: Text(
+                      "사용자:  Loaf Cat",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 11.0,
+                      ),
+                    ),
+                    //////text - email
+                    accountEmail: Text(
+                      "junheeyu.***@Gmail.com",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.grey[850],
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0),
+                        )),
+                  ),
+                  ///////Drawer Head list
+
+                  //////////////////////////////////////////////////////
+                  // SignIn icon
+                  ListTile(
+                    leading: Icon(
+                      Icons.person,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      "Sign in",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onTap: () {
+                      print("Sign in is clicked");
+                      Alert(
+                          context: context,
+                          title: "LOGIN",
+                          content: Column(
+                            children: <Widget>[
+                              TextField(
+                                decoration: InputDecoration(
+                                  icon: Icon(Icons.account_circle),
+                                  labelText: 'Username',
+                                ),
+                              ),
+                              TextField(
+                                obscureText: true,
+                                decoration: InputDecoration(
+                                  icon: Icon(Icons.lock),
+                                  labelText: 'Password',
+                                ),
+                              ),
+                            ],
+                          ),
+                          buttons: [
+                            DialogButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: Text(
+                                "LOGIN",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            )
+                          ]).show();
+                    },
+                    //trailing: Icon(Icons.add),
+                  ),
+
+                  //////////////////////////////////////////////////////
+                  // SignUp Icon
+                  ListTile(
+                    leading: Icon(
+                      Icons.person_add,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      "SignUp",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onTap: () {
+                      print("SignUp is clicked");
+                      Navigator.pushNamed(context, 'signup');
+                    },
+                    //trailing: Icon(Icons.add),
+                  ),
+
+                  //////////////////////////////////////////////////////
+                  // Profile Icon
+                  ListTile(
+                    leading: Icon(
+                      Icons.person_pin_rounded,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      "Profile",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onTap: () {
+                      print("Profile is clicked");
+                      Navigator.pushNamed(context, 'profile');
+                    },
+                    //trailing: Icon(Icons.add),
+                  ),
+
+                  //////////////////////////////////////////////////////
+                  // Q&A Icon
+                  ListTile(
+                    leading: Icon(
+                      Icons.question_answer,
+                      color: Colors.white,
+                    ),
+                    title: Text(
+                      "Q&A",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    onTap: () {
+                      print("Q&A is clicked");
+                    },
+                    //trailing: Icon(Icons.add),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }
