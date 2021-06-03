@@ -47,8 +47,6 @@ Text _textState(int index) {
 }
 
 Widget gridState(int index) {
-//  if (rewardCheck[rewardMap[test]] == 0) rewardCheck[rewardMap[test]] = 1;
-  if (rewardCheck[rewardMap[test1]] == 0) rewardCheck[rewardMap[test1]] = 1;
   if (rewardCheck[index] == 1)
     return Center(child: Image.asset("assets/reward7.png"));
   else

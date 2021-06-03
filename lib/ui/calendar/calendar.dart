@@ -580,10 +580,12 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                                 // count 3
                                 case 3:
                                   {
+                                    _checkingAchievement(stampDayCount);
                                     // Snack Bar setup
                                     Scaffold.of(context2).showSnackBar(SnackBar(
                                       content: Text(
-                                        "작심삼일이 뭔데???",
+                                        achievementMap.keys
+                                            .elementAt(stampDayCount),
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
@@ -600,12 +602,14 @@ class _RewardCalendarPageState extends State<RewardCalendarPage> {
                                 // count 7
                                 case 7:
                                   {
+                                    _checkingReward(stampDayCount);
                                     Navigator.pop(context2);
                                     Alert(
                                       context: context2,
                                       style: alertStyle,
                                       title: "이대로만 가자!",
-                                      desc: "7일 연속 수고했어!",
+                                      desc: rewardMap.keys
+                                          .elementAt(stampDayCount),
                                       image: Image.asset(
                                         "assets/reward7.png",
                                         //color: Colors.grey[600],
@@ -682,4 +686,15 @@ AnimatedContainer buildCalendarDayMarkerSub(DateTime date, List events) {
     width: 53,
     height: 53,
   );
+}
+
+Widget _checkingReward(int index) {
+  if (rewardCheck[rewardMap[rewardMap.keys.elementAt(index)]] == 0)
+    rewardCheck[rewardMap[rewardMap.keys.elementAt(index)]] = 1;
+}
+
+Widget _checkingAchievement(int index) {
+  if (achievementCheck[achievementMap[achievementMap.keys.elementAt(index)]] ==
+      0)
+    achievementCheck[achievementMap[achievementMap.keys.elementAt(index)]] = 1;
 }

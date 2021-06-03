@@ -53,10 +53,10 @@ var stampDayCount = 0;
 var rewardCount = 15;
 var achievementCount = 15;
 
-var test = '벌써 한 달!';
-var test1 = '91011';
+// var test = '벌써 한 달!';
+// var test1 = '91011';
 
-var test3 = '333333';
+// var test3 = '333333';
 
 var xAlignment = 0.0;
 var yAlignment = 0.9;
@@ -65,14 +65,14 @@ var rewardCheck = List<int>.filled(rewardCount, 0);
 var achievementCheck = List<int>.filled(achievementCount, 0);
 
 Map rewardMap = {
-  '7일 연속 수고했어!': 0,
+  '123123123': 0,
   '벌써 한 달!': 1,
   '100일!': 2,
   '123': 3,
   '456': 4,
   '678': 5,
   '91011': 6,
-  '121314': 7,
+  '7일 연속 수고했어!': 7,
   '151617': 8,
   '181920': 9,
   '212223': 10,
@@ -83,10 +83,10 @@ Map rewardMap = {
 };
 
 Map achievementMap = {
-  '작심삼일이 뭔데???': 0,
+  '333333': 0,
   '111111': 1,
   '222222': 2,
-  '333333': 3,
+  '작심삼일이 뭔데???': 3,
   '444444': 4,
   '555555': 5,
   '666666': 6,
@@ -105,4 +105,3 @@ Map achievementMap = {
 //////////////////////////////////////////////////////////
 //
 //
-
